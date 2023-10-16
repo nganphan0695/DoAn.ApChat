@@ -1,0 +1,741 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		045BB2B22ADA64D900B807D2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045BB2B12ADA64D900B807D2 /* ProfileViewController.swift */; };
+		045BB2B62ADBB73500B807D2 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045BB2B42ADBB73500B807D2 /* ProfileTableViewCell.swift */; };
+		045BB2B72ADBB73500B807D2 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045BB2B52ADBB73500B807D2 /* ProfileTableViewCell.xib */; };
+		045BB2B92ADBC66F00B807D2 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045BB2B82ADBC66F00B807D2 /* Profile.swift */; };
+		045BB2BF2ADC285300B807D2 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045BB2BE2ADC285300B807D2 /* SettingViewController.swift */; };
+		047DDBD12ADA37DA00AE0003 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047DDBD02ADA37D900AE0003 /* Home.storyboard */; };
+		047DDBD52ADA3D1300AE0003 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DDBD42ADA3D1300AE0003 /* MessageViewController.swift */; };
+		047DDBDA2ADA48EE00AE0003 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DDBD82ADA48EE00AE0003 /* MessageTableViewCell.swift */; };
+		047DDBDB2ADA48EE00AE0003 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047DDBD92ADA48EE00AE0003 /* MessageTableViewCell.xib */; };
+		0492B2E82ADCEEDF001D0CE0 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492B2E62ADCEEDF001D0CE0 /* RegisterViewController.swift */; };
+		0492B2E92ADCEEDF001D0CE0 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492B2E72ADCEEDF001D0CE0 /* RegisterViewController.xib */; };
+		0492B2F02ADCF2AB001D0CE0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492B2EE2ADCF2AB001D0CE0 /* LoginViewController.swift */; };
+		0492B2F12ADCF2AB001D0CE0 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492B2EF2ADCF2AB001D0CE0 /* LoginViewController.xib */; };
+		0492B2F42ADCFFE9001D0CE0 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492B2F22ADCFFE9001D0CE0 /* ForgotPasswordViewController.swift */; };
+		0492B2F52ADCFFE9001D0CE0 /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492B2F32ADCFFE9001D0CE0 /* ForgotPasswordViewController.xib */; };
+		0492B2F82ADD03B8001D0CE0 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492B2F62ADD03B8001D0CE0 /* SettingTableViewCell.swift */; };
+		0492B2F92ADD03B8001D0CE0 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492B2F72ADD03B8001D0CE0 /* SettingTableViewCell.xib */; };
+		0492B2FC2ADD0F14001D0CE0 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492B2FB2ADD0F14001D0CE0 /* ContactViewController.swift */; };
+		0492B3002ADD15FE001D0CE0 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492B2FE2ADD15FE001D0CE0 /* ChatViewController.swift */; };
+		0492B3012ADD15FE001D0CE0 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492B2FF2ADD15FE001D0CE0 /* ChatViewController.xib */; };
+		0492B3052ADD2A44001D0CE0 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492B3032ADD2A44001D0CE0 /* ChatTableViewCell.swift */; };
+		0492B3062ADD2A44001D0CE0 /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492B3042ADD2A44001D0CE0 /* ChatTableViewCell.xib */; };
+		049A87CB2AD806A200BF5A97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049A87CA2AD806A200BF5A97 /* AppDelegate.swift */; };
+		049A87CD2AD806A200BF5A97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049A87CC2AD806A200BF5A97 /* SceneDelegate.swift */; };
+		049A87D42AD806A300BF5A97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049A87D32AD806A300BF5A97 /* Assets.xcassets */; };
+		049A87D72AD806A300BF5A97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049A87D52AD806A300BF5A97 /* LaunchScreen.storyboard */; };
+		049A87F22AD806EE00BF5A97 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87DF2AD806EE00BF5A97 /* Poppins-ExtraBold.ttf */; };
+		049A87F32AD806EE00BF5A97 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87E02AD806EE00BF5A97 /* Poppins-LightItalic.ttf */; };
+		049A87F42AD806EE00BF5A97 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87E12AD806EE00BF5A97 /* Poppins-Black.ttf */; };
+		049A87F52AD806EE00BF5A97 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87E22AD806EE00BF5A97 /* Poppins-Regular.ttf */; };
+		049A87F62AD806EE00BF5A97 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87E32AD806EE00BF5A97 /* Poppins-Medium.ttf */; };
+		049A87F72AD806EE00BF5A97 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87E42AD806EE00BF5A97 /* Poppins-ExtraLight.ttf */; };
+		049A87F82AD806EE00BF5A97 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87E52AD806EE00BF5A97 /* Poppins-SemiBold.ttf */; };
+		049A87F92AD806EE00BF5A97 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87E62AD806EE00BF5A97 /* Poppins-ExtraBoldItalic.ttf */; };
+		049A87FA2AD806EE00BF5A97 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87E72AD806EE00BF5A97 /* Poppins-BlackItalic.ttf */; };
+		049A87FB2AD806EE00BF5A97 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87E82AD806EE00BF5A97 /* Poppins-ExtraLightItalic.ttf */; };
+		049A87FC2AD806EE00BF5A97 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87E92AD806EE00BF5A97 /* Poppins-MediumItalic.ttf */; };
+		049A87FD2AD806EE00BF5A97 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87EA2AD806EE00BF5A97 /* Poppins-Thin.ttf */; };
+		049A87FE2AD806EE00BF5A97 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 049A87EB2AD806EE00BF5A97 /* OFL.txt */; };
+		049A87FF2AD806EE00BF5A97 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87EC2AD806EE00BF5A97 /* Poppins-BoldItalic.ttf */; };
+		049A88002AD806EE00BF5A97 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87ED2AD806EE00BF5A97 /* Poppins-ThinItalic.ttf */; };
+		049A88012AD806EE00BF5A97 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87EE2AD806EE00BF5A97 /* Poppins-SemiBoldItalic.ttf */; };
+		049A88022AD806EE00BF5A97 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87EF2AD806EE00BF5A97 /* Poppins-Light.ttf */; };
+		049A88032AD806EE00BF5A97 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87F02AD806EE00BF5A97 /* Poppins-Italic.ttf */; };
+		049A88042AD806EE00BF5A97 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87F12AD806EE00BF5A97 /* Poppins-Bold.ttf */; };
+		049A88062AD8103A00BF5A97 /* OnBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049A88052AD8103A00BF5A97 /* OnBoardViewController.swift */; };
+		049A88332AD92C5B00BF5A97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049A88322AD92C5B00BF5A97 /* Main.storyboard */; };
+		049A883D2AD940B900BF5A97 /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049A883C2AD940B900BF5A97 /* AuthServices.swift */; };
+		049A883F2AD9411200BF5A97 /* OnBoardServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049A883E2AD9411200BF5A97 /* OnBoardServices.swift */; };
+		0E42FE517F8F6C0A43E824B6 /* Pods_Takenoko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FB91B97B493BC27C18293A /* Pods_Takenoko.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		045BB2B12ADA64D900B807D2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		045BB2B42ADBB73500B807D2 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		045BB2B52ADBB73500B807D2 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
+		045BB2B82ADBC66F00B807D2 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		045BB2BE2ADC285300B807D2 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		047DDBD02ADA37D900AE0003 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		047DDBD42ADA3D1300AE0003 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		047DDBD82ADA48EE00AE0003 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		047DDBD92ADA48EE00AE0003 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
+		0492B2E62ADCEEDF001D0CE0 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		0492B2E72ADCEEDF001D0CE0 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		0492B2EE2ADCF2AB001D0CE0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0492B2EF2ADCF2AB001D0CE0 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		0492B2F22ADCFFE9001D0CE0 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		0492B2F32ADCFFE9001D0CE0 /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgotPasswordViewController.xib; sourceTree = "<group>"; };
+		0492B2F62ADD03B8001D0CE0 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingTableViewCell.swift; path = Takenoko/Screen/Home/SettingTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		0492B2F72ADD03B8001D0CE0 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SettingTableViewCell.xib; path = Takenoko/Screen/Home/SettingTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		0492B2FB2ADD0F14001D0CE0 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		0492B2FE2ADD15FE001D0CE0 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		0492B2FF2ADD15FE001D0CE0 /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		0492B3032ADD2A44001D0CE0 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		0492B3042ADD2A44001D0CE0 /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
+		049A87C72AD806A200BF5A97 /* Takenoko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Takenoko.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		049A87CA2AD806A200BF5A97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		049A87CC2AD806A200BF5A97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		049A87D32AD806A300BF5A97 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		049A87D62AD806A300BF5A97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		049A87D82AD806A300BF5A97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		049A87DF2AD806EE00BF5A97 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
+		049A87E02AD806EE00BF5A97 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
+		049A87E12AD806EE00BF5A97 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Black.ttf"; sourceTree = "<group>"; };
+		049A87E22AD806EE00BF5A97 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		049A87E32AD806EE00BF5A97 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		049A87E42AD806EE00BF5A97 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
+		049A87E52AD806EE00BF5A97 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		049A87E62AD806EE00BF5A97 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		049A87E72AD806EE00BF5A97 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
+		049A87E82AD806EE00BF5A97 /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		049A87E92AD806EE00BF5A97 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
+		049A87EA2AD806EE00BF5A97 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		049A87EB2AD806EE00BF5A97 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		049A87EC2AD806EE00BF5A97 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
+		049A87ED2AD806EE00BF5A97 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
+		049A87EE2AD806EE00BF5A97 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		049A87EF2AD806EE00BF5A97 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
+		049A87F02AD806EE00BF5A97 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Italic.ttf"; sourceTree = "<group>"; };
+		049A87F12AD806EE00BF5A97 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		049A88052AD8103A00BF5A97 /* OnBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardViewController.swift; sourceTree = "<group>"; };
+		049A88322AD92C5B00BF5A97 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		049A883C2AD940B900BF5A97 /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
+		049A883E2AD9411200BF5A97 /* OnBoardServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardServices.swift; sourceTree = "<group>"; };
+		0D2C71846AA88611396D82CD /* Pods-Takenoko.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Takenoko.debug.xcconfig"; path = "Target Support Files/Pods-Takenoko/Pods-Takenoko.debug.xcconfig"; sourceTree = "<group>"; };
+		32FB91B97B493BC27C18293A /* Pods_Takenoko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Takenoko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA3E0D866D64C473E64AC0E5 /* Pods-Takenoko.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Takenoko.release.xcconfig"; path = "Target Support Files/Pods-Takenoko/Pods-Takenoko.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		049A87C42AD806A200BF5A97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E42FE517F8F6C0A43E824B6 /* Pods_Takenoko.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		045BB2B02ADA64A800B807D2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				045BB2B32ADBB71B00B807D2 /* Cells */,
+				045BB2B12ADA64D900B807D2 /* ProfileViewController.swift */,
+				045BB2B82ADBC66F00B807D2 /* Profile.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		045BB2B32ADBB71B00B807D2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				045BB2B42ADBB73500B807D2 /* ProfileTableViewCell.swift */,
+				045BB2B52ADBB73500B807D2 /* ProfileTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		045BB2C02ADC28E200B807D2 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				045BB2C52ADC2AEC00B807D2 /* Cells */,
+				045BB2BE2ADC285300B807D2 /* SettingViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		045BB2C52ADC2AEC00B807D2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0492B2F62ADD03B8001D0CE0 /* SettingTableViewCell.swift */,
+				0492B2F72ADD03B8001D0CE0 /* SettingTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		047DDBC92AD9827E00AE0003 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				0492B2E62ADCEEDF001D0CE0 /* RegisterViewController.swift */,
+				0492B2E72ADCEEDF001D0CE0 /* RegisterViewController.xib */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		047DDBCE2AD98C0200AE0003 /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				0492B2F22ADCFFE9001D0CE0 /* ForgotPasswordViewController.swift */,
+				0492B2F32ADCFFE9001D0CE0 /* ForgotPasswordViewController.xib */,
+			);
+			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
+		047DDBCF2ADA37C400AE0003 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0492B2FA2ADD0EC3001D0CE0 /* Contact */,
+				045BB2C02ADC28E200B807D2 /* Setting */,
+				045BB2B02ADA64A800B807D2 /* Profile */,
+				0492B2FD2ADD15E5001D0CE0 /* Chat */,
+				047DDBD62ADA48B100AE0003 /* Message */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		047DDBD62ADA48B100AE0003 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				047DDBD42ADA3D1300AE0003 /* MessageViewController.swift */,
+				047DDBD72ADA48C400AE0003 /* Cells */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		047DDBD72ADA48C400AE0003 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				047DDBD82ADA48EE00AE0003 /* MessageTableViewCell.swift */,
+				047DDBD92ADA48EE00AE0003 /* MessageTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0492B2FA2ADD0EC3001D0CE0 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				0492B2FB2ADD0F14001D0CE0 /* ContactViewController.swift */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
+		0492B2FD2ADD15E5001D0CE0 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				0492B3022ADD2A23001D0CE0 /* Cells */,
+				0492B2FE2ADD15FE001D0CE0 /* ChatViewController.swift */,
+				0492B2FF2ADD15FE001D0CE0 /* ChatViewController.xib */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		0492B3022ADD2A23001D0CE0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0492B3032ADD2A44001D0CE0 /* ChatTableViewCell.swift */,
+				0492B3042ADD2A44001D0CE0 /* ChatTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		049A87BE2AD806A200BF5A97 = {
+			isa = PBXGroup;
+			children = (
+				049A87C92AD806A200BF5A97 /* Takenoko */,
+				049A87C82AD806A200BF5A97 /* Products */,
+				BF056CC8002DB2B829E64540 /* Pods */,
+				2BBAEC93669CB123951D0439 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		049A87C82AD806A200BF5A97 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				049A87C72AD806A200BF5A97 /* Takenoko.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		049A87C92AD806A200BF5A97 /* Takenoko */ = {
+			isa = PBXGroup;
+			children = (
+				049A883B2AD9408600BF5A97 /* Services */,
+				049A88342AD9310000BF5A97 /* Screen */,
+				049A87DE2AD806AB00BF5A97 /* Fonts */,
+				049A87CA2AD806A200BF5A97 /* AppDelegate.swift */,
+				049A87CC2AD806A200BF5A97 /* SceneDelegate.swift */,
+				049A87D32AD806A300BF5A97 /* Assets.xcassets */,
+				049A87D52AD806A300BF5A97 /* LaunchScreen.storyboard */,
+				049A87D82AD806A300BF5A97 /* Info.plist */,
+			);
+			path = Takenoko;
+			sourceTree = "<group>";
+		};
+		049A87DE2AD806AB00BF5A97 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				049A87EB2AD806EE00BF5A97 /* OFL.txt */,
+				049A87E12AD806EE00BF5A97 /* Poppins-Black.ttf */,
+				049A87E72AD806EE00BF5A97 /* Poppins-BlackItalic.ttf */,
+				049A87F12AD806EE00BF5A97 /* Poppins-Bold.ttf */,
+				049A87EC2AD806EE00BF5A97 /* Poppins-BoldItalic.ttf */,
+				049A87DF2AD806EE00BF5A97 /* Poppins-ExtraBold.ttf */,
+				049A87E62AD806EE00BF5A97 /* Poppins-ExtraBoldItalic.ttf */,
+				049A87E42AD806EE00BF5A97 /* Poppins-ExtraLight.ttf */,
+				049A87E82AD806EE00BF5A97 /* Poppins-ExtraLightItalic.ttf */,
+				049A87F02AD806EE00BF5A97 /* Poppins-Italic.ttf */,
+				049A87EF2AD806EE00BF5A97 /* Poppins-Light.ttf */,
+				049A87E02AD806EE00BF5A97 /* Poppins-LightItalic.ttf */,
+				049A87E32AD806EE00BF5A97 /* Poppins-Medium.ttf */,
+				049A87E92AD806EE00BF5A97 /* Poppins-MediumItalic.ttf */,
+				049A87E22AD806EE00BF5A97 /* Poppins-Regular.ttf */,
+				049A87E52AD806EE00BF5A97 /* Poppins-SemiBold.ttf */,
+				049A87EE2AD806EE00BF5A97 /* Poppins-SemiBoldItalic.ttf */,
+				049A87EA2AD806EE00BF5A97 /* Poppins-Thin.ttf */,
+				049A87ED2AD806EE00BF5A97 /* Poppins-ThinItalic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		049A88092AD8105600BF5A97 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				049A88052AD8103A00BF5A97 /* OnBoardViewController.swift */,
+				049A88322AD92C5B00BF5A97 /* Main.storyboard */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		049A88342AD9310000BF5A97 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				047DDBCF2ADA37C400AE0003 /* Home */,
+				047DDBD02ADA37D900AE0003 /* Home.storyboard */,
+				047DDBCE2AD98C0200AE0003 /* ForgotPassword */,
+				047DDBC92AD9827E00AE0003 /* Register */,
+				049A88352AD9311900BF5A97 /* Login */,
+				049A88092AD8105600BF5A97 /* OnBoarding */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		049A88352AD9311900BF5A97 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0492B2EE2ADCF2AB001D0CE0 /* LoginViewController.swift */,
+				0492B2EF2ADCF2AB001D0CE0 /* LoginViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		049A883B2AD9408600BF5A97 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				049A883C2AD940B900BF5A97 /* AuthServices.swift */,
+				049A883E2AD9411200BF5A97 /* OnBoardServices.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2BBAEC93669CB123951D0439 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				32FB91B97B493BC27C18293A /* Pods_Takenoko.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF056CC8002DB2B829E64540 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0D2C71846AA88611396D82CD /* Pods-Takenoko.debug.xcconfig */,
+				EA3E0D866D64C473E64AC0E5 /* Pods-Takenoko.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		049A87C62AD806A200BF5A97 /* Takenoko */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 049A87DB2AD806A300BF5A97 /* Build configuration list for PBXNativeTarget "Takenoko" */;
+			buildPhases = (
+				6B521F1DF43D26D781F3865B /* [CP] Check Pods Manifest.lock */,
+				049A87C32AD806A200BF5A97 /* Sources */,
+				049A87C42AD806A200BF5A97 /* Frameworks */,
+				049A87C52AD806A200BF5A97 /* Resources */,
+				9594C8C16F6B1CD69EBB8E11 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Takenoko;
+			productName = Takenoko;
+			productReference = 049A87C72AD806A200BF5A97 /* Takenoko.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		049A87BF2AD806A200BF5A97 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					049A87C62AD806A200BF5A97 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 049A87C22AD806A200BF5A97 /* Build configuration list for PBXProject "Takenoko" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 049A87BE2AD806A200BF5A97;
+			productRefGroup = 049A87C82AD806A200BF5A97 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				049A87C62AD806A200BF5A97 /* Takenoko */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		049A87C52AD806A200BF5A97 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				049A87F42AD806EE00BF5A97 /* Poppins-Black.ttf in Resources */,
+				049A88012AD806EE00BF5A97 /* Poppins-SemiBoldItalic.ttf in Resources */,
+				049A87F22AD806EE00BF5A97 /* Poppins-ExtraBold.ttf in Resources */,
+				049A87F52AD806EE00BF5A97 /* Poppins-Regular.ttf in Resources */,
+				049A87F72AD806EE00BF5A97 /* Poppins-ExtraLight.ttf in Resources */,
+				049A87FA2AD806EE00BF5A97 /* Poppins-BlackItalic.ttf in Resources */,
+				049A87FC2AD806EE00BF5A97 /* Poppins-MediumItalic.ttf in Resources */,
+				049A88042AD806EE00BF5A97 /* Poppins-Bold.ttf in Resources */,
+				0492B3012ADD15FE001D0CE0 /* ChatViewController.xib in Resources */,
+				0492B2F92ADD03B8001D0CE0 /* SettingTableViewCell.xib in Resources */,
+				049A87FE2AD806EE00BF5A97 /* OFL.txt in Resources */,
+				049A87F32AD806EE00BF5A97 /* Poppins-LightItalic.ttf in Resources */,
+				049A88032AD806EE00BF5A97 /* Poppins-Italic.ttf in Resources */,
+				0492B2E92ADCEEDF001D0CE0 /* RegisterViewController.xib in Resources */,
+				049A88332AD92C5B00BF5A97 /* Main.storyboard in Resources */,
+				049A87F82AD806EE00BF5A97 /* Poppins-SemiBold.ttf in Resources */,
+				049A87FF2AD806EE00BF5A97 /* Poppins-BoldItalic.ttf in Resources */,
+				0492B3062ADD2A44001D0CE0 /* ChatTableViewCell.xib in Resources */,
+				045BB2B72ADBB73500B807D2 /* ProfileTableViewCell.xib in Resources */,
+				049A88022AD806EE00BF5A97 /* Poppins-Light.ttf in Resources */,
+				047DDBDB2ADA48EE00AE0003 /* MessageTableViewCell.xib in Resources */,
+				0492B2F12ADCF2AB001D0CE0 /* LoginViewController.xib in Resources */,
+				049A87F92AD806EE00BF5A97 /* Poppins-ExtraBoldItalic.ttf in Resources */,
+				049A87FD2AD806EE00BF5A97 /* Poppins-Thin.ttf in Resources */,
+				049A87FB2AD806EE00BF5A97 /* Poppins-ExtraLightItalic.ttf in Resources */,
+				0492B2F52ADCFFE9001D0CE0 /* ForgotPasswordViewController.xib in Resources */,
+				049A87D72AD806A300BF5A97 /* LaunchScreen.storyboard in Resources */,
+				049A87F62AD806EE00BF5A97 /* Poppins-Medium.ttf in Resources */,
+				049A88002AD806EE00BF5A97 /* Poppins-ThinItalic.ttf in Resources */,
+				047DDBD12ADA37DA00AE0003 /* Home.storyboard in Resources */,
+				049A87D42AD806A300BF5A97 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6B521F1DF43D26D781F3865B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Takenoko-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9594C8C16F6B1CD69EBB8E11 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Takenoko/Pods-Takenoko-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Takenoko/Pods-Takenoko-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Takenoko/Pods-Takenoko-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		049A87C32AD806A200BF5A97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0492B2F42ADCFFE9001D0CE0 /* ForgotPasswordViewController.swift in Sources */,
+				0492B2FC2ADD0F14001D0CE0 /* ContactViewController.swift in Sources */,
+				049A883D2AD940B900BF5A97 /* AuthServices.swift in Sources */,
+				0492B3052ADD2A44001D0CE0 /* ChatTableViewCell.swift in Sources */,
+				045BB2B92ADBC66F00B807D2 /* Profile.swift in Sources */,
+				045BB2B22ADA64D900B807D2 /* ProfileViewController.swift in Sources */,
+				045BB2B62ADBB73500B807D2 /* ProfileTableViewCell.swift in Sources */,
+				045BB2BF2ADC285300B807D2 /* SettingViewController.swift in Sources */,
+				0492B2F82ADD03B8001D0CE0 /* SettingTableViewCell.swift in Sources */,
+				047DDBDA2ADA48EE00AE0003 /* MessageTableViewCell.swift in Sources */,
+				047DDBD52ADA3D1300AE0003 /* MessageViewController.swift in Sources */,
+				049A87CB2AD806A200BF5A97 /* AppDelegate.swift in Sources */,
+				0492B3002ADD15FE001D0CE0 /* ChatViewController.swift in Sources */,
+				0492B2E82ADCEEDF001D0CE0 /* RegisterViewController.swift in Sources */,
+				049A88062AD8103A00BF5A97 /* OnBoardViewController.swift in Sources */,
+				0492B2F02ADCF2AB001D0CE0 /* LoginViewController.swift in Sources */,
+				049A87CD2AD806A200BF5A97 /* SceneDelegate.swift in Sources */,
+				049A883F2AD9411200BF5A97 /* OnBoardServices.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		049A87D52AD806A300BF5A97 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				049A87D62AD806A300BF5A97 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		049A87D92AD806A300BF5A97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		049A87DA2AD806A300BF5A97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		049A87DC2AD806A300BF5A97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D2C71846AA88611396D82CD /* Pods-Takenoko.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 57APVGWD23;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Takenoko/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "App-Demo.Takenoko";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		049A87DD2AD806A300BF5A97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA3E0D866D64C473E64AC0E5 /* Pods-Takenoko.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 57APVGWD23;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Takenoko/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "App-Demo.Takenoko";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		049A87C22AD806A200BF5A97 /* Build configuration list for PBXProject "Takenoko" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				049A87D92AD806A300BF5A97 /* Debug */,
+				049A87DA2AD806A300BF5A97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		049A87DB2AD806A300BF5A97 /* Build configuration list for PBXNativeTarget "Takenoko" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				049A87DC2AD806A300BF5A97 /* Debug */,
+				049A87DD2AD806A300BF5A97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 049A87BF2AD806A200BF5A97 /* Project object */;
+}
