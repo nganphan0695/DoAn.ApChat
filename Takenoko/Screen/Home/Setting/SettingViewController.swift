@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 enum SettingItem: Int {
     case notification = 0
@@ -125,13 +126,7 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
             let item = items[indexPath.row]
             switch item{
             case .logOut:
-                AuthServices.shared.clearAccessToken()
-                if let unWindow = (UIApplication.shared.delegate as? AppDelegate)?.window{
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let navigationVC = storyboard.instantiateViewController(withIdentifier: "NavigationOnBoard")
-                    unWindow.rootViewController = navigationVC
-                    unWindow.makeKeyAndVisible()
-                }
+                handleLogout()
             default:
                 return showAlert()
             }
@@ -141,6 +136,33 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
         let cancel = UIAlertAction(title: "OK", style: .cancel)
         alertVC.addAction(cancel)
         present(alertVC, animated: true)
+    }
+    
+    func goToNavigationOnBoard(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationVC = storyboard.instantiateViewController(withIdentifier: "NavigationOnBoard")
+        let keyWindow = UIApplication.shared.connectedScenes
+            .filter({$0.activationState == .foregroundActive})
+            .compactMap({$0 as? UIWindowScene})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first
+        
+        keyWindow?.rootViewController = navigationVC
+    }
+    
+    func handleLogout() {
+        do {
+            try Auth.auth().signOut()
+            goToNavigationOnBoard()
+        } catch let signOutError as NSError {
+            let alert = UIAlertController(title: "Lỗi", message: signOutError.localizedDescription, preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Ok", style: .default)
+            
+            alert.addAction(okAction)
+            
+            present(alert, animated: true)
+        }
     }
     
 }

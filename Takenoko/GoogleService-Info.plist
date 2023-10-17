@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBzm67AXhyMwyTB1v1nCa7TeCWSXxRd4lM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>597561922835</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>App-Demo.Takenoko</string>
+	<key>PROJECT_ID</key>
+	<string>takenoko-7811d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>takenoko-7811d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:597561922835:ios:47e89a6980a7db0c8cb6e6</string>
+</dict>
+</plist>

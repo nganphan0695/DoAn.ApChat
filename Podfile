@@ -7,5 +7,8 @@ target 'Takenoko' do
 
   # Pods for Takenoko
   pod 'KeychainSwift', '~> 20.0'
+  pod 'FirebaseAuth'
+  pod 'FirebaseDatabase'
+  pod 'FirebaseFirestore'
 
 end

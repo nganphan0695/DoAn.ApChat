@@ -19,16 +19,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Takenoko" customModuleProvider="target">
             <connections>
-                <outlet property="appleButton" destination="BaD-fj-uqu" id="N0w-6m-pkF"/>
                 <outlet property="appleView" destination="nPB-Yj-qpD" id="wmt-rN-eHC"/>
                 <outlet property="clearEmailView" destination="aNl-Sn-Tvw" id="ZAb-C8-1xv"/>
                 <outlet property="emailErrorLabel" destination="gPX-Kg-BfB" id="ePP-0n-hyS"/>
                 <outlet property="emailErrorView" destination="Q4n-33-tJz" id="rPu-Gk-q5J"/>
                 <outlet property="emailText" destination="3n1-pX-Yl2" id="d9H-z4-yvK"/>
-                <outlet property="facebookButton" destination="Qzj-sA-vmv" id="HiA-Oj-rgg"/>
                 <outlet property="facebookView" destination="4Fx-K1-Ula" id="vqS-Qd-hx2"/>
-                <outlet property="googleButton" destination="fGL-dF-gCH" id="uC6-MB-0YZ"/>
                 <outlet property="googleView" destination="kDy-QC-ZZC" id="VLc-hy-jJz"/>
+                <outlet property="loginBt" destination="TRO-2c-Zy6" id="Jv0-sm-5Yo"/>
                 <outlet property="passwordErrorLabel" destination="eFv-W8-P0u" id="eLm-hf-BdA"/>
                 <outlet property="passwordErrorView" destination="lFs-m3-J4C" id="Ht5-n4-ARy"/>
                 <outlet property="passwordText" destination="Vu4-Ci-TtS" id="AcA-kl-8cq"/>
@@ -108,7 +106,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASa-SA-dKu">
                                                     <rect key="frame" x="0.0" y="25" width="345" height="48"/>
                                                     <subviews>
-                                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nhập Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3n1-pX-Yl2">
+                                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="phanthingan0695@gmail" borderStyle="roundedRect" placeholder="Nhập Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3n1-pX-Yl2">
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="48"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -223,7 +221,7 @@
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye.slash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1sY-ex-sln">
                                                                     <rect key="frame" x="3" y="4.6666666666666643" width="18" height="15.000000000000004"/>
-                                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bi8-qF-cNN">
                                                                     <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>

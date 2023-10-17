@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
 
@@ -221,14 +221,6 @@ extension ProfileViewController: UITextFieldDelegate{
         let pointInTable = textField.convert(textField.bounds.origin, to: self.tableView)
         if let indexPath = self.tableView.indexPathForRow(at: pointInTable){
             let item = items[indexPath.row]
-//            switch item{
-//            case .name:
-//                self.updateProfileResponse.fullName = textField.text ?? ""
-//            case .bio:
-//                self.updateProfileResponse.bio = textField.text ?? ""
-//            default:
-//                break
-//            }
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
@@ -20,19 +21,18 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var secureTextEntryImage: UIImageView!
     
-    @IBOutlet weak var appleButton: UIButton!
     @IBOutlet weak var appleView: UIView!
-    @IBOutlet weak var googleButton: UIButton!
     @IBOutlet weak var googleView: UIView!
-    @IBOutlet weak var facebookButton: UIButton!
     @IBOutlet weak var facebookView: UIView!
     
+    @IBOutlet weak var loginBt: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
         setupEmailView()
         setupPasswordView()
         setUpView()
+        loginBt.isEnabled = false
     }
     
     func setUpView(){
@@ -48,9 +48,8 @@ class LoginViewController: UIViewController {
         appleView.layer.borderWidth = 1
         appleView.layer.borderColor = UIColor.black.cgColor
         
-        facebookButton.layer.cornerRadius = 24
-        appleButton.layer.cornerRadius = 24
-        googleButton.layer.cornerRadius = 24
+        emailText.autocorrectionType = .no
+        passwordText.autocorrectionType = .no
     }
     
     func setupEmailView(){
@@ -117,7 +116,6 @@ class LoginViewController: UIViewController {
     @IBAction func handleLoginBt(_ sender: Any) {
         if validate(){
             callAPILogin()
-            goToHome()
         }
     }
     
@@ -159,6 +157,7 @@ extension LoginViewController{
         }
         
         if emailValid == true && passwordValid == true{
+            loginBt.isEnabled = true
             return true
         }else{
             return false
@@ -172,16 +171,34 @@ extension LoginViewController{
     }
     
     func goToHome(){
-        if let unWindow = (UIApplication.shared.delegate as? AppDelegate)?.window{
-            let storyboard = UIStoryboard(name: "Home", bundle: nil)
-            let rootVC = storyboard.instantiateViewController(withIdentifier: "HomeUITabBarViewController")
-            let navigation = UINavigationController(rootViewController: rootVC)
-            unWindow.rootViewController = navigation
-            unWindow.makeKeyAndVisible()
-        }
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeUITabBarViewController")
+        
+        let keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .compactMap({$0 as? UIWindowScene})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+        
+        keyWindow?.rootViewController = homeVC
+//            unWindow.makeKeyAndVisible()
     }
     
     func callAPILogin(){
+        let email: String = emailText.text ?? ""
+        let password: String = passwordText.text ?? ""
         
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+            guard let strongSelf = self else { return }
+            guard error == nil else{
+                let alertVC = UIAlertController(title: "Lỗi", message: error?.localizedDescription, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .cancel)
+                alertVC.addAction(okAction)
+                strongSelf.present(alertVC, animated: true)
+                return
+            }
+            let user = authResult?.user
+            strongSelf.goToHome()
+        }
     }
 }

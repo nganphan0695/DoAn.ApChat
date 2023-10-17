@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0429FEB32ADE2B94009FC1D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0429FEB22ADE2B94009FC1D7 /* GoogleService-Info.plist */; };
 		045BB2B22ADA64D900B807D2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045BB2B12ADA64D900B807D2 /* ProfileViewController.swift */; };
 		045BB2B62ADBB73500B807D2 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045BB2B42ADBB73500B807D2 /* ProfileTableViewCell.swift */; };
 		045BB2B72ADBB73500B807D2 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045BB2B52ADBB73500B807D2 /* ProfileTableViewCell.xib */; };
@@ -60,6 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0429FEB22ADE2B94009FC1D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		045BB2B12ADA64D900B807D2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		045BB2B42ADBB73500B807D2 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		045BB2B52ADBB73500B807D2 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				049A87D32AD806A300BF5A97 /* Assets.xcassets */,
 				049A87D52AD806A300BF5A97 /* LaunchScreen.storyboard */,
 				049A87D82AD806A300BF5A97 /* Info.plist */,
+				0429FEB22ADE2B94009FC1D7 /* GoogleService-Info.plist */,
 			);
 			path = Takenoko;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				049A87F92AD806EE00BF5A97 /* Poppins-ExtraBoldItalic.ttf in Resources */,
 				049A87FD2AD806EE00BF5A97 /* Poppins-Thin.ttf in Resources */,
 				049A87FB2AD806EE00BF5A97 /* Poppins-ExtraLightItalic.ttf in Resources */,
+				0429FEB32ADE2B94009FC1D7 /* GoogleService-Info.plist in Resources */,
 				0492B2F52ADCFFE9001D0CE0 /* ForgotPasswordViewController.xib in Resources */,
 				049A87D72AD806A300BF5A97 /* LaunchScreen.storyboard in Resources */,
 				049A87F62AD806EE00BF5A97 /* Poppins-Medium.ttf in Resources */,

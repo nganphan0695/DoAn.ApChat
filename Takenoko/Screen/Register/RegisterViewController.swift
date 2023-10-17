@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterViewController: UIViewController {
 
@@ -14,10 +15,11 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var emailErrorLabel: UILabel!
     
-    @IBOutlet weak var nameText: UITextField!
-    @IBOutlet weak var clearNameView: UIView!
-    @IBOutlet weak var nameErrorView: UIView!
-    @IBOutlet weak var nameErrorLabel: UILabel!
+    @IBOutlet weak var confirmPasswordSecureImage: UIImageView!
+    @IBOutlet weak var confirmPasswordText: UITextField!
+    @IBOutlet weak var confirmPasswordSecureView: UIView!
+    @IBOutlet weak var confirmPasswordErrorView: UIView!
+    @IBOutlet weak var confirmPasswordErrorLabel: UILabel!
     
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var passwordErrorView: UIView!
@@ -25,13 +27,14 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var secureImage: UIImageView!
     @IBOutlet weak var secureTextEntryView: UIView!
     
+    @IBOutlet weak var registerBt: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
-        setupNameView()
+        setupConfirmPasswordView()
         setupEmailView()
         setupPasswordView()
-
+        registerBt.isEnabled = false
     }
     
     func setupEmailView(){
@@ -40,6 +43,7 @@ class RegisterViewController: UIViewController {
         emailText.layer.borderColor = UIColor(red: 0.31, green: 0.29, blue: 0.40, alpha: 1.00).cgColor
         clearEmailView.isHidden = true
         emailErrorView.isHidden = true
+        emailText.autocorrectionType = .no
     }
     
     func setupPasswordView(){
@@ -48,14 +52,16 @@ class RegisterViewController: UIViewController {
         secureTextEntryView.backgroundColor = .white
         passwordText.layer.borderColor = UIColor(red: 0.31, green: 0.29, blue: 0.40, alpha: 1.00).cgColor
         passwordErrorView.isHidden = true
+        passwordText.autocorrectionType = .no
     }
     
-    func setupNameView(){
-        nameText.backgroundColor = .white
-        nameText.layer.borderColor = UIColor(red: 0.31, green: 0.29, blue: 0.40, alpha: 1.00).cgColor
-        nameText.addTarget(self, action: #selector(textFieldDidEditing(_:)), for: .editingChanged)
-        clearNameView.isHidden = true
-        nameErrorView.isHidden = true
+    func setupConfirmPasswordView(){
+        confirmPasswordText.backgroundColor = .white
+        confirmPasswordText.addTarget(self, action: #selector(textFieldDidEditing(_:)), for: .editingChanged)
+        confirmPasswordSecureView.backgroundColor = .white
+        confirmPasswordText.layer.borderColor = UIColor(red: 0.31, green: 0.29, blue: 0.40, alpha: 1.00).cgColor
+        confirmPasswordErrorView.isHidden = true
+        confirmPasswordText.autocorrectionType = .no
     }
     
     func emailError(textError: String){
@@ -72,18 +78,20 @@ class RegisterViewController: UIViewController {
         setupEmailView()
     }
     
-    func nameError(textError: String){
-        nameErrorView.isHidden = false
-        clearNameView.isHidden = false
-        nameText.backgroundColor = UIColor(red: 1.00, green: 0.95, blue: 0.97, alpha: 1.00)
-        nameText.layer.borderColor = UIColor(red: 0.76, green: 0.00, blue: 0.32, alpha: 1.00).cgColor
-        clearNameView.backgroundColor = UIColor(red: 1.00, green: 0.95, blue: 0.97, alpha: 1.00)
-        nameErrorLabel.text = textError
+    func confirmPasswordError(textError: String){
+        confirmPasswordErrorView.isHidden = false
+        confirmPasswordText.backgroundColor = UIColor(red: 1.00, green: 0.95, blue: 0.97, alpha: 1.00)
+        confirmPasswordText.layer.borderColor = UIColor(red: 0.76, green: 0.00, blue: 0.32, alpha: 1.00).cgColor
+        confirmPasswordSecureView.backgroundColor = UIColor(red: 1.00, green: 0.95, blue: 0.97, alpha: 1.00)
+        confirmPasswordErrorLabel.text = textError
     }
     
-    @IBAction func clearName(_ sender: Any) {
-        nameText.text = ""
-        setupNameView()
+    @IBAction func isSecureTextConfirmPassword(_ sender: Any) {
+        confirmPasswordText.isSecureTextEntry = !confirmPasswordText.isSecureTextEntry
+        let isSecureTextEntry = confirmPasswordText.isSecureTextEntry
+        let hideImage = UIImage(systemName: "eye.slash")
+        let showImage = UIImage(systemName: "eye")
+        confirmPasswordSecureImage.image = isSecureTextEntry ? hideImage : showImage
     }
     
     func passError(textError: String){
@@ -94,7 +102,7 @@ class RegisterViewController: UIViewController {
         passwordErrorLabel.text = textError
     }
     
-    @IBAction func isSecureText(_ sender: Any) {
+    @IBAction func isSecureTextPassword(_ sender: Any) {
         passwordText.isSecureTextEntry = !passwordText.isSecureTextEntry
         let isSecureTextEntry = passwordText.isSecureTextEntry
         let hideImage = UIImage(systemName: "eye.slash")
@@ -109,8 +117,6 @@ class RegisterViewController: UIViewController {
     @IBAction func handleRegisterBt(_ sender: Any) {
         if validate(){
             callAPILogin()
-            let loginViewController = LoginViewController(nibName: "LoginViewController", bundle: nil)
-            self.navigationController?.pushViewController(loginViewController, animated: true)
         }
     }
     
@@ -124,18 +130,11 @@ extension RegisterViewController{
     func validate() -> Bool{
         let email: String = emailText.text ?? ""
         let password: String = passwordText.text ?? ""
-        let name: String = nameText.text ?? ""
+        let confirmPassword: String = confirmPasswordText.text ?? ""
         
         var emailValid = false
         var passwordValid = false
-        var nameValid = false
-        
-        if name.isEmpty{
-            nameError(textError: "Tên không được để trống")
-        }else{
-            nameValid = true
-            setupNameView()
-        }
+        var confirmPasswordValid = false
         
         if email.isEmpty{
             emailError(textError: "Email không được để trống")
@@ -155,7 +154,17 @@ extension RegisterViewController{
             setupPasswordView()
         }
         
-        if emailValid == true && passwordValid == true && nameValid == true{
+        if confirmPassword.isEmpty{
+            confirmPasswordError(textError: "Mật khẩu không được để trống")
+        }else if confirmPassword != password{
+            confirmPasswordError(textError: "Mật khẩu chưa đúng")
+        }else{
+            confirmPasswordValid = true
+            setupConfirmPasswordView()
+        }
+        
+        if emailValid == true && passwordValid == true && confirmPasswordValid == true{
+            registerBt.isEnabled = true
             return true
         }else{
             return false
@@ -169,6 +178,35 @@ extension RegisterViewController{
     }
     
     func callAPILogin(){
+        let email: String = emailText.text ?? ""
+        let password: String = passwordText.text ?? ""
+//        let confirmPassword: String = confirmPasswordText.text ?? ""
         
+        Auth.auth().createUser(withEmail: email, password: password) {[weak self] authResult, error in
+            guard let self = self else {return}
+            
+            guard error == nil else{
+                switch AuthErrorCode.Code(rawValue: error!._code){
+                case .emailAlreadyInUse:
+                    self.registerFailure(title: "Lỗi", message: "Email đã tồn tại")
+                case .invalidEmail:
+                    self.registerFailure(title: "Lỗi", message: "Email không hợp lệ")
+                default:
+                    self.registerFailure(title: "Lỗi", message: error?.localizedDescription ?? "")
+                }
+                return
+            }
+            let user = authResult?.user
+            
+            let loginViewController = LoginViewController(nibName: "LoginViewController", bundle: nil)
+            self.navigationController?.pushViewController(loginViewController, animated: true)
+        }
+    }
+    
+    func registerFailure(title: String, message: String){
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel)
+        alertVC.addAction(okAction)
+        present(alertVC, animated: true)
     }
 }
