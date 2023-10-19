@@ -1,9 +1,6 @@
-//
 //  RegisterViewController.swift
 //  Takenoko
-//
 //  Created by Ngân Phan on 13/10/2023.
-//
 
 import UIKit
 import FirebaseAuth
@@ -170,13 +167,7 @@ extension RegisterViewController{
             return false
         }
     }
-    
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{1,4}$"
-        let emailTest = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
-        return emailTest.evaluate(with: email)
-    }
-    
+
     func callAPILogin(){
         let email: String = emailText.text ?? ""
         let password: String = passwordText.text ?? ""
@@ -188,25 +179,17 @@ extension RegisterViewController{
             guard error == nil else{
                 switch AuthErrorCode.Code(rawValue: error!._code){
                 case .emailAlreadyInUse:
-                    self.registerFailure(title: "Lỗi", message: "Email đã tồn tại")
+                    self.showAlert(title: "Lỗi", message: "Email đã tồn tại")
                 case .invalidEmail:
-                    self.registerFailure(title: "Lỗi", message: "Email không hợp lệ")
+                    self.showAlert(title: "Lỗi", message: "Email không hợp lệ")
                 default:
-                    self.registerFailure(title: "Lỗi", message: error?.localizedDescription ?? "")
+                    self.showAlert(title: "Lỗi", message: error?.localizedDescription ?? "")
                 }
                 return
             }
-            let user = authResult?.user
-            
+//            let user = authResult?.user
             let loginViewController = LoginViewController(nibName: "LoginViewController", bundle: nil)
             self.navigationController?.pushViewController(loginViewController, animated: true)
         }
-    }
-    
-    func registerFailure(title: String, message: String){
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel)
-        alertVC.addAction(okAction)
-        present(alertVC, animated: true)
     }
 }

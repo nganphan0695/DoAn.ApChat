@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if Auth.auth().currentUser != nil{
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
 
-                    let rootVC = storyboard.instantiateViewController(withIdentifier: "HomeUITabBarViewController")
-                    let navigation = UINavigationController(rootViewController: rootVC)
+                    let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeUITabBarViewController")
+                    let navigation = UINavigationController(rootViewController: homeVC)
                     window?.rootViewController = navigation
                     window?.makeKeyAndVisible()
             }else{

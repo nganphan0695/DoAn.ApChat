@@ -6,9 +6,21 @@ target 'Takenoko' do
   use_frameworks!
 
   # Pods for Takenoko
-  pod 'KeychainSwift', '~> 20.0'
+  pod 'MBProgressHUD', '~> 1.2.0'
+  pod 'Kingfisher', '~> 7.0'
   pod 'FirebaseAuth'
   pod 'FirebaseDatabase'
-  pod 'FirebaseFirestore'
+  pod 'FirebaseStorage'
+  
+#  pod 'Firebase/Core'
+#  pod 'FirebaseFirestore'
 
+end
+
+post_install do |pi|
+  pi.pods_project.targets.each do |t|
+    t.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+    end
+  end
 end

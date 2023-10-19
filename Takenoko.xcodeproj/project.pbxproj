@@ -55,8 +55,9 @@
 		049A88042AD806EE00BF5A97 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 049A87F12AD806EE00BF5A97 /* Poppins-Bold.ttf */; };
 		049A88062AD8103A00BF5A97 /* OnBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049A88052AD8103A00BF5A97 /* OnBoardViewController.swift */; };
 		049A88332AD92C5B00BF5A97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049A88322AD92C5B00BF5A97 /* Main.storyboard */; };
-		049A883D2AD940B900BF5A97 /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049A883C2AD940B900BF5A97 /* AuthServices.swift */; };
-		049A883F2AD9411200BF5A97 /* OnBoardServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049A883E2AD9411200BF5A97 /* OnBoardServices.swift */; };
+		04B88CE82ADFB32F000D4A21 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B88CE72ADFB32F000D4A21 /* Extension.swift */; };
+		04B88CEA2ADFBA6D000D4A21 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B88CE92ADFBA6D000D4A21 /* Setting.swift */; };
+		04B88CEC2ADFC04F000D4A21 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B88CEB2ADFC04F000D4A21 /* FirebaseManager.swift */; };
 		0E42FE517F8F6C0A43E824B6 /* Pods_Takenoko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FB91B97B493BC27C18293A /* Pods_Takenoko.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,8 +112,9 @@
 		049A87F12AD806EE00BF5A97 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		049A88052AD8103A00BF5A97 /* OnBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardViewController.swift; sourceTree = "<group>"; };
 		049A88322AD92C5B00BF5A97 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		049A883C2AD940B900BF5A97 /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
-		049A883E2AD9411200BF5A97 /* OnBoardServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardServices.swift; sourceTree = "<group>"; };
+		04B88CE72ADFB32F000D4A21 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		04B88CE92ADFBA6D000D4A21 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		04B88CEB2ADFC04F000D4A21 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		0D2C71846AA88611396D82CD /* Pods-Takenoko.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Takenoko.debug.xcconfig"; path = "Target Support Files/Pods-Takenoko/Pods-Takenoko.debug.xcconfig"; sourceTree = "<group>"; };
 		32FB91B97B493BC27C18293A /* Pods_Takenoko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Takenoko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3E0D866D64C473E64AC0E5 /* Pods-Takenoko.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Takenoko.release.xcconfig"; path = "Target Support Files/Pods-Takenoko/Pods-Takenoko.release.xcconfig"; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				045BB2C52ADC2AEC00B807D2 /* Cells */,
 				045BB2BE2ADC285300B807D2 /* SettingViewController.swift */,
+				04B88CE92ADFBA6D000D4A21 /* Setting.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -188,11 +191,12 @@
 		047DDBCF2ADA37C400AE0003 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				047DDBD02ADA37D900AE0003 /* Home.storyboard */,
 				0492B2FA2ADD0EC3001D0CE0 /* Contact */,
 				045BB2C02ADC28E200B807D2 /* Setting */,
+				047DDBD62ADA48B100AE0003 /* Message */,
 				045BB2B02ADA64A800B807D2 /* Profile */,
 				0492B2FD2ADD15E5001D0CE0 /* Chat */,
-				047DDBD62ADA48B100AE0003 /* Message */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -263,7 +267,8 @@
 		049A87C92AD806A200BF5A97 /* Takenoko */ = {
 			isa = PBXGroup;
 			children = (
-				049A883B2AD9408600BF5A97 /* Services */,
+				04B88CED2ADFC055000D4A21 /* FirebaseManager */,
+				04B88CE62ADFB2F6000D4A21 /* Extension */,
 				049A88342AD9310000BF5A97 /* Screen */,
 				049A87DE2AD806AB00BF5A97 /* Fonts */,
 				049A87CA2AD806A200BF5A97 /* AppDelegate.swift */,
@@ -315,7 +320,6 @@
 			isa = PBXGroup;
 			children = (
 				047DDBCF2ADA37C400AE0003 /* Home */,
-				047DDBD02ADA37D900AE0003 /* Home.storyboard */,
 				047DDBCE2AD98C0200AE0003 /* ForgotPassword */,
 				047DDBC92AD9827E00AE0003 /* Register */,
 				049A88352AD9311900BF5A97 /* Login */,
@@ -333,13 +337,20 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		049A883B2AD9408600BF5A97 /* Services */ = {
+		04B88CE62ADFB2F6000D4A21 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				049A883C2AD940B900BF5A97 /* AuthServices.swift */,
-				049A883E2AD9411200BF5A97 /* OnBoardServices.swift */,
+				04B88CE72ADFB32F000D4A21 /* Extension.swift */,
 			);
-			path = Services;
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		04B88CED2ADFC055000D4A21 /* FirebaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				04B88CEB2ADFC04F000D4A21 /* FirebaseManager.swift */,
+			);
+			path = FirebaseManager;
 			sourceTree = "<group>";
 		};
 		2BBAEC93669CB123951D0439 /* Frameworks */ = {
@@ -505,22 +516,23 @@
 			files = (
 				0492B2F42ADCFFE9001D0CE0 /* ForgotPasswordViewController.swift in Sources */,
 				0492B2FC2ADD0F14001D0CE0 /* ContactViewController.swift in Sources */,
-				049A883D2AD940B900BF5A97 /* AuthServices.swift in Sources */,
 				0492B3052ADD2A44001D0CE0 /* ChatTableViewCell.swift in Sources */,
 				045BB2B92ADBC66F00B807D2 /* Profile.swift in Sources */,
 				045BB2B22ADA64D900B807D2 /* ProfileViewController.swift in Sources */,
 				045BB2B62ADBB73500B807D2 /* ProfileTableViewCell.swift in Sources */,
 				045BB2BF2ADC285300B807D2 /* SettingViewController.swift in Sources */,
 				0492B2F82ADD03B8001D0CE0 /* SettingTableViewCell.swift in Sources */,
+				04B88CEA2ADFBA6D000D4A21 /* Setting.swift in Sources */,
+				04B88CEC2ADFC04F000D4A21 /* FirebaseManager.swift in Sources */,
 				047DDBDA2ADA48EE00AE0003 /* MessageTableViewCell.swift in Sources */,
 				047DDBD52ADA3D1300AE0003 /* MessageViewController.swift in Sources */,
+				04B88CE82ADFB32F000D4A21 /* Extension.swift in Sources */,
 				049A87CB2AD806A200BF5A97 /* AppDelegate.swift in Sources */,
 				0492B3002ADD15FE001D0CE0 /* ChatViewController.swift in Sources */,
 				0492B2E82ADCEEDF001D0CE0 /* RegisterViewController.swift in Sources */,
 				049A88062AD8103A00BF5A97 /* OnBoardViewController.swift in Sources */,
 				0492B2F02ADCF2AB001D0CE0 /* LoginViewController.swift in Sources */,
 				049A87CD2AD806A200BF5A97 /* SceneDelegate.swift in Sources */,
-				049A883F2AD9411200BF5A97 /* OnBoardServices.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

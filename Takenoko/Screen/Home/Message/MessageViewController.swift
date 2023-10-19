@@ -1,9 +1,7 @@
-//
 //  MessageViewController.swift
 //  Takenoko
 //
 //  Created by Ngân Phan on 14/10/2023.
-//
 
 import UIKit
 
@@ -13,7 +11,6 @@ class MessageViewController: UIViewController {
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var avatarImage: UIImageView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +38,9 @@ class MessageViewController: UIViewController {
     
     func goToProfile(){
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-
         let navigationVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-
         self.navigationController?.pushViewController(navigationVC, animated: true)
     }
-
 }
 
 extension MessageViewController: UITableViewDataSource, UITableViewDelegate{

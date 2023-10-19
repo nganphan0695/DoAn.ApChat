@@ -42,17 +42,9 @@ class OnBoardViewController: UIViewController {
     }
     
     @IBAction func handleButton(_ sender: Any) {
-        showAlert()
+        showAlert(title: "Xin lỗi", message: "Tính năng này sẽ được phát triển sau")
     }
-    
-    func showAlert(){
-        let alertVC = UIAlertController(title: "Xin lỗi", message: "Tính năng này sẽ được phát triển sau", preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "OK", style: .cancel)
-        alertVC.addAction(cancel)
-        present(alertVC, animated: true)
-    }
-    
-    
+
     @IBAction func handleLoginBt(_ sender: Any) {
         let loginViewController = LoginViewController(nibName: "LoginViewController", bundle: nil)
         self.navigationController?.pushViewController(loginViewController, animated: true)

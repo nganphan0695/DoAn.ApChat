@@ -1,9 +1,6 @@
-//
 //  LoginViewController.swift
 //  Takenoko
-//
 //  Created by Ngân Phan on 13/10/2023.
-//
 
 import UIKit
 import FirebaseAuth
@@ -103,14 +100,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func handleButton(_ sender: Any) {
-        showAlert()
-    }
-    
-    func showAlert(){
-        let alertVC = UIAlertController(title: "Xin lỗi", message: "Tính năng này sẽ được phát triển sau", preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "OK", style: .cancel)
-        alertVC.addAction(cancel)
-        present(alertVC, animated: true)
+        showAlert(title: "Xin lỗi", message: "Tính năng này sẽ được phát triển sau")
     }
     
     @IBAction func handleLoginBt(_ sender: Any) {
@@ -164,15 +154,10 @@ extension LoginViewController{
         }
     }
     
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{1,4}$"
-        let emailTest = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
-        return emailTest.evaluate(with: email)
-    }
-    
     func goToHome(){
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeUITabBarViewController")
+        let navigation = UINavigationController(rootViewController: homeVC)
         
         let keyWindow = UIApplication.shared.connectedScenes
                 .filter({$0.activationState == .foregroundActive})
@@ -180,8 +165,8 @@ extension LoginViewController{
                 .first?.windows
                 .filter({$0.isKeyWindow}).first
         
-        keyWindow?.rootViewController = homeVC
-//            unWindow.makeKeyAndVisible()
+        keyWindow?.rootViewController = navigation
+        keyWindow?.makeKeyAndVisible()
     }
     
     func callAPILogin(){
@@ -197,7 +182,7 @@ extension LoginViewController{
                 strongSelf.present(alertVC, animated: true)
                 return
             }
-            let user = authResult?.user
+//            let user = authResult?.user
             strongSelf.goToHome()
         }
     }

@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import Kingfisher
 
 class ProfileViewController: UIViewController {
 
@@ -18,23 +19,39 @@ class ProfileViewController: UIViewController {
     
     var imagePickUp = UIImagePickerController()
     
-    private var items = [ProfileItem]()
+    private var items = [Profile]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
         setupView()
-        
-//        let name = Profile(item: .name, value: "")
-//        let email = Profile(item: .email, value: "")
-//        let gender = Profile(item: .gender, value: "")
-//        let birthday = Profile(item: .birthday, value: "")
-//        let phone = Profile(item: .phone, value: "")
-//        let address = Profile(item: .address, value: "")
-        
-        items = [.name, .email, .gender, .birthday, .phone, .address]
         setupTableView()
-
+        getProfile()
+    }
+    
+    func getProfile(){
+        showLoading(isShow: true)
+        
+        
+        if let imageUrl = Auth.auth().currentUser?.photoURL{
+            self.avatarImage.kf.setImage(with: imageUrl)
+        }
+        
+        FirebaseManager.shared.getUserProfile { [weak self] user in
+            let name = Profile(item: .name, value: user?.name ?? "")
+            let email = Profile(item: .email, value: user?.email ?? "")
+            let gender = Profile(item: .gender, value: user?.gender ?? "")
+            let birthday = Profile(item: .birthday, value: user?.birthday ?? "")
+            let phone = Profile(item: .phone, value: user?.phone ?? "")
+            let address = Profile(item: .address, value: user?.address ?? "")
+            
+            self?.items = [name, email, gender, birthday, phone, address]
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                self?.userNameLabel.text = "\(user?.name ?? "Tên người dùng")"
+                self?.showLoading(isShow: false)
+            }
+        }
     }
     
     func setupView(){
@@ -50,17 +67,16 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func handleCheckmarkBt(_ sender: Any) {
-      
         self.view.endEditing(true)
+        
         if let imageData = self.avatarImage.image?.jpegData(compressionQuality: 0.5){
             callAPIUpdateAvatar(imageData: imageData)
         }
         
-        if validate(){
-            callAPIUpdateProfile()
-            self.navigationController?.popViewController(animated: true)
-        }
-        
+//        if validate(){
+//            callAPIUpdateProfile()
+//            self.navigationController?.popViewController(animated: true)
+//        }
     }
     
     func validate() -> Bool{
@@ -97,15 +113,9 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{1,4}$"
-        let emailTest = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
-        return emailTest.evaluate(with: email)
-    }
-    
     func getCellAtItem(item: ProfileItem) -> ProfileTableViewCell?{
         guard let row = items.firstIndex(where: { profile in
-            return profile == item
+            return profile.item == item
         }) else {
             return nil
         }
@@ -145,7 +155,6 @@ extension ProfileViewController{
         
         let cancel = UIAlertAction(title: "Huỷ", style: .cancel)
         alertVC.addAction(cancel)
-        
         present(alertVC, animated: true)
     }
 }
@@ -156,13 +165,11 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         self.avatarImage.image = image
         imagePickUp.dismiss(animated: true, completion: { () -> Void in
-            // Dismiss
         })
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         imagePickUp.dismiss(animated: true, completion: { () -> Void in
-            // Dismiss
         })
     }
 }
@@ -170,11 +177,48 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 extension ProfileViewController{
     
     private func callAPIUpdateAvatar(imageData: Data){
-        
+        if let imageData = self.avatarImage.image?.jpegData(compressionQuality: 0.5){
+            FirebaseManager.shared.uploadImage(imageData) {[weak self] status, message in
+                if status{
+                    self?.showAlert(title: "Thành công", message: "Cập nhật ảnh thành công!")
+                }else{
+                    self?.showAlert(title: "Lỗi", message: message)
+                }
+            }
+        }
     }
     
     private func callAPIUpdateProfile(){
+        let name        = getValue(item: .name)
+        let email       = getValue(item: .email)
+        let gender      = getValue(item: .gender)
+        let birthday    = getValue(item: .birthday)
+        let phone       = getValue(item: .phone)
+        let address     = getValue(item: .address)
         
+        let user = UserResponse(
+            name: name,
+            email: email,
+            gender: gender,
+            birthday: birthday,
+            phone: phone,
+            address: address
+        )
+        
+       showLoading(isShow: true)
+        FirebaseManager.shared.updateUserProfile(user) { [weak self] success, message in
+            self?.showLoading(isShow: false)
+            guard let strongSelf = self else { return }
+            if success{
+                strongSelf.showAlert(title: "Thành công", message: message ?? "Cập nhật thành công")
+            }else{
+                strongSelf.showAlert(title: "Thất bại", message: message ?? "Cập nhật không thành công")
+            }
+        }
+    }
+    func getValue(item: ProfileItem) -> String{
+        let profile = items.first(where: {$0.item == item})
+        return profile?.value ?? ""
     }
 }
 
@@ -200,16 +244,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = items[indexPath.row]
-        let title = item.tittle()
-        let isShowRequired = item.isHiddenRequired()
-//        let errorView = item.isHiddenErrorView()
+        let profile = items[indexPath.row]
+        let title = profile.item.tittle()
+        let isShowRequired = profile.item.isHiddenRequired()
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell", for: indexPath) as! ProfileTableViewCell
-//        cell.textField.text = items[indexPath.row].value
-        cell.nameLabel.text = title
-        cell.label.isHidden = isShowRequired
-//        cell.errorView.isHidden = errorView
+        cell.textField.text = profile.value
+        cell.titleLabel.text = title
+        cell.requiredlabel.isHidden = isShowRequired
         
         cell.textField.delegate = self
         return cell
@@ -220,7 +262,10 @@ extension ProfileViewController: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         let pointInTable = textField.convert(textField.bounds.origin, to: self.tableView)
         if let indexPath = self.tableView.indexPathForRow(at: pointInTable){
-            let item = items[indexPath.row]
+            let profile = items[indexPath.row]
+            guard let text = textField.text else {return}
+            
+            profile.value = text
         }
     }
 }

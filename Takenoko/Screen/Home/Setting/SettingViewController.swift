@@ -1,68 +1,9 @@
-//
 //  SettingViewController.swift
 //  Takenoko
-//
 //  Created by Ngân Phan on 15/10/2023.
-//
 
 import UIKit
 import FirebaseAuth
-
-enum SettingItem: Int {
-    case notification = 0
-    case security
-    case help
-    case darkMode
-    case logOut
-    
-    func tittle() -> String{
-        switch self{
-        case .notification:
-            return "Thông báo"
-        case .security:
-            return "Bảo mật"
-        case .help:
-            return "Trợ giúp"
-        case .darkMode:
-            return "Giao diện"
-        case .logOut:
-            return "Đăng xuất"
-        }
-    }
-    
-    func image() -> UIImage?{
-        switch self{
-        case .notification:
-            return UIImage(systemName: "bell")
-        case .security:
-            return UIImage(systemName: "lock")
-        case .help:
-            return UIImage(systemName: "questionmark.circle")
-        case .darkMode:
-            return UIImage(systemName: "moon")
-        case .logOut:
-            return UIImage(systemName: "rectangle.portrait.and.arrow.right")
-        }
-    }
-    
-//    func isHiddenSwitch() -> Bool{
-//        switch self{
-//        case .darkMode:
-//            return false
-//        default:
-//            return true
-//        }
-//    }
-    
-    func isHiddenButton() -> Bool{
-        switch self{
-        case .notification, .security, .help:
-            return false
-        default:
-            return true
-        }
-    }
-}
 
 class SettingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -128,15 +69,9 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
             case .logOut:
                 handleLogout()
             default:
-                return showAlert()
+                return showAlert(title: "Xin lỗi", message: "Tính năng này sẽ được phát triển sau")
             }
         }
-    func showAlert(){
-        let alertVC = UIAlertController(title: "Xin lỗi", message: "Tính năng này sẽ được phát triển sau", preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "OK", style: .cancel)
-        alertVC.addAction(cancel)
-        present(alertVC, animated: true)
-    }
     
     func goToNavigationOnBoard(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -155,13 +90,7 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
             try Auth.auth().signOut()
             goToNavigationOnBoard()
         } catch let signOutError as NSError {
-            let alert = UIAlertController(title: "Lỗi", message: signOutError.localizedDescription, preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(title: "Ok", style: .default)
-            
-            alert.addAction(okAction)
-            
-            present(alert, animated: true)
+            showAlert(title: "Lỗi", message: signOutError.localizedDescription)
         }
     }
     

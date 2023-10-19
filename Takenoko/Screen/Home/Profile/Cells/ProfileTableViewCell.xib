@@ -125,9 +125,9 @@
             <connections>
                 <outlet property="errorLabel" destination="Zjl-Uc-EIb" id="dMd-dL-FUi"/>
                 <outlet property="errorView" destination="p8L-9l-oIH" id="g7J-5h-fTb"/>
-                <outlet property="label" destination="Bge-C8-e7u" id="rzu-MD-u4D"/>
-                <outlet property="nameLabel" destination="tOF-JX-bWH" id="7ie-nh-UOX"/>
+                <outlet property="requiredlabel" destination="Bge-C8-e7u" id="IHj-9C-nwA"/>
                 <outlet property="textField" destination="uQM-Iy-B9I" id="q8L-5u-tC8"/>
+                <outlet property="titleLabel" destination="tOF-JX-bWH" id="MW7-5o-cwB"/>
             </connections>
             <point key="canvasLocation" x="4.5801526717557248" y="57.394366197183103"/>
         </tableViewCell>

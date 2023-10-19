@@ -52,12 +52,29 @@ enum ProfileItem: Int {
 }
 
 
-//class Profile{
-//    var item: SettingItem
-//    var value: String
-//    
-//    init(item: SettingItem, value: String) {
-//        self.item = item
-//        self.value = value
-//    }
-//}
+class Profile{
+    var item: ProfileItem
+    var value: String
+    
+    init(item: ProfileItem, value: String) {
+        self.item = item
+        self.value = value
+    }
+}
+
+struct UserResponse: Codable{
+    var name: String
+    var email: String
+    var gender: String
+    var birthday: String
+    var phone: String
+    var address: String
+}
+
+extension String{
+    func safeEmail() -> Self{
+        let safeEmail = self.replacingOccurrences(of: ".", with: "_")
+        let replace = safeEmail.replacingOccurrences(of: "@", with: "-")
+        return replace
+    }
+}

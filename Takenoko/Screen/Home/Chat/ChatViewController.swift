@@ -35,12 +35,6 @@ class ChatViewController: UIViewController {
     }
     
     @IBAction func optionButton(_ sender: Any) {
-        showAlert()
-    }
-    func showAlert(){
-        let alertVC = UIAlertController(title: "Xin lỗi", message: "Tính năng này sẽ được phát triển sau", preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "OK", style: .cancel)
-        alertVC.addAction(cancel)
-        present(alertVC, animated: true)
+        showAlert(title: "Xin lỗi", message: "Tính năng này sẽ được phát triển sau")
     }
 }
