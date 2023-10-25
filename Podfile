@@ -11,9 +11,11 @@ target 'Takenoko' do
   pod 'FirebaseAuth'
   pod 'FirebaseDatabase'
   pod 'FirebaseStorage'
-  
-#  pod 'Firebase/Core'
-#  pod 'FirebaseFirestore'
+  pod 'FirebaseFirestore'
+  pod 'MessageKit'
+  pod 'IQKeyboardManagerSwift'
+  pod 'SwiftHEXColors'
+
 
 end
 

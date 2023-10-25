@@ -171,10 +171,13 @@ extension RegisterViewController{
     func callAPILogin(){
         let email: String = emailText.text ?? ""
         let password: String = passwordText.text ?? ""
-//        let confirmPassword: String = confirmPasswordText.text ?? ""
         
+        showLoading(isShow: true)
         Auth.auth().createUser(withEmail: email, password: password) {[weak self] authResult, error in
-            guard let self = self else {return}
+            guard let self = self else {
+                self?.showLoading(isShow: false)
+                return
+            }
             
             guard error == nil else{
                 switch AuthErrorCode.Code(rawValue: error!._code){
@@ -185,10 +188,29 @@ extension RegisterViewController{
                 default:
                     self.showAlert(title: "Lỗi", message: error?.localizedDescription ?? "")
                 }
+                showLoading(isShow: false)
                 return
             }
-//            let user = authResult?.user
+            
+            let user = authResult?.user
+            if let email = user?.email, let uid = user?.uid{
+                let user = UserResponse(
+                    uid: uid,
+                    name: "",
+                    email: email,
+                    gender: "",
+                    birthday: "",
+                    phone: "",
+                    address: "",
+                    photoUrl: "",
+                    photoName: ""
+                )
+                FirebaseManager.shared.insertUser(user)
+            }
+            showLoading(isShow: false)
+            
             let loginViewController = LoginViewController(nibName: "LoginViewController", bundle: nil)
+            loginViewController.email = user?.email
             self.navigationController?.pushViewController(loginViewController, animated: true)
         }
     }

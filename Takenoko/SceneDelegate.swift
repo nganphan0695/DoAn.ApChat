@@ -15,9 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        if Auth.auth().currentUser != nil{
+        if let isLogin = UserDefaultsManager.shared.getLoginStatus(), isLogin, Auth.auth().currentUser != nil{
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
-
                     let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeUITabBarViewController")
                     let navigation = UINavigationController(rootViewController: homeVC)
                     window?.rootViewController = navigation

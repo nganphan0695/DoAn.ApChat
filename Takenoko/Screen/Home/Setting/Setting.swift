@@ -45,15 +45,6 @@ enum SettingItem: Int {
         }
     }
     
-//    func isHiddenSwitch() -> Bool{
-//        switch self{
-//        case .darkMode:
-//            return false
-//        default:
-//            return true
-//        }
-//    }
-    
     func isHiddenButton() -> Bool{
         switch self{
         case .notification, .security, .help:

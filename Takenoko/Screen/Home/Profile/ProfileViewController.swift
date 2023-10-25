@@ -18,39 +18,41 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var avatarView: UIView!
     
     var imagePickUp = UIImagePickerController()
+    var imageHasChange: Bool = false
     
     private var items = [Profile]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: true)
         setupView()
         setupTableView()
-        getProfile()
+        
+        guard let email = Auth.auth().currentUser?.email else {return}
+        showLoading(isShow: true)
+        FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
+            UserDefaultsManager.shared.save(user)
+                    self?.updateUser(user)
+                    self?.showLoading(isShow: false)
+        })
     }
     
-    func getProfile(){
-        showLoading(isShow: true)
-        
-        
-        if let imageUrl = Auth.auth().currentUser?.photoURL{
-            self.avatarImage.kf.setImage(with: imageUrl)
-        }
-        
-        FirebaseManager.shared.getUserProfile { [weak self] user in
-            let name = Profile(item: .name, value: user?.name ?? "")
-            let email = Profile(item: .email, value: user?.email ?? "")
-            let gender = Profile(item: .gender, value: user?.gender ?? "")
-            let birthday = Profile(item: .birthday, value: user?.birthday ?? "")
-            let phone = Profile(item: .phone, value: user?.phone ?? "")
-            let address = Profile(item: .address, value: user?.address ?? "")
-            
-            self?.items = [name, email, gender, birthday, phone, address]
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-                self?.userNameLabel.text = "\(user?.name ?? "Tên người dùng")"
-                self?.showLoading(isShow: false)
+    func updateUser(_ user: UserResponse?){
+        let name = Profile(item: .name, value: user?.name ?? "")
+        let email = Profile(item: .email, value: user?.email ?? "")
+        let gender = Profile(item: .gender, value: user?.gender ?? "")
+        let birthday = Profile(item: .birthday, value: user?.birthday ?? "")
+        let phone = Profile(item: .phone, value: user?.phone ?? "")
+        let address = Profile(item: .address, value: user?.address ?? "")
+                
+        self.items = [name, email, gender, birthday, phone, address]
+                
+        DispatchQueue.main.async {
+            if let photoUrl = user?.photoUrl, let url = URL(string: photoUrl){
+                self.avatarImage.kf.setImage(with: url)
             }
+            let userName = name.value.isEmpty ? email.value : name.value
+            self.userNameLabel.text = userName
+            self.tableView.reloadData()
         }
     }
     
@@ -61,22 +63,13 @@ class ProfileViewController: UIViewController {
         avatarView.clipsToBounds = true
         cameraView.layer.cornerRadius = cameraView.frame.height / 2
     }
-
-    @IBAction func handleBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
     
     @IBAction func handleCheckmarkBt(_ sender: Any) {
         self.view.endEditing(true)
         
-        if let imageData = self.avatarImage.image?.jpegData(compressionQuality: 0.5){
-            callAPIUpdateAvatar(imageData: imageData)
+        if validate(){
+            callAPIUpdateAvatarAndProfile()
         }
-        
-//        if validate(){
-//            callAPIUpdateProfile()
-//            self.navigationController?.popViewController(animated: true)
-//        }
     }
     
     func validate() -> Bool{
@@ -176,19 +169,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 
 extension ProfileViewController{
     
-    private func callAPIUpdateAvatar(imageData: Data){
-        if let imageData = self.avatarImage.image?.jpegData(compressionQuality: 0.5){
-            FirebaseManager.shared.uploadImage(imageData) {[weak self] status, message in
-                if status{
-                    self?.showAlert(title: "Thành công", message: "Cập nhật ảnh thành công!")
-                }else{
-                    self?.showAlert(title: "Lỗi", message: message)
-                }
-            }
-        }
-    }
-    
-    private func callAPIUpdateProfile(){
+    private func callAPIUpdateAvatarAndProfile(){
+     
         let name        = getValue(item: .name)
         let email       = getValue(item: .email)
         let gender      = getValue(item: .gender)
@@ -196,26 +178,56 @@ extension ProfileViewController{
         let phone       = getValue(item: .phone)
         let address     = getValue(item: .address)
         
-        let user = UserResponse(
-            name: name,
-            email: email,
-            gender: gender,
-            birthday: birthday,
-            phone: phone,
-            address: address
-        )
+        var values: [String: Any] = [
+            "name": name,
+            "email": email,
+            "gender": gender,
+            "birthday": birthday,
+            "phone": phone,
+            "address": address
+        ]
         
-       showLoading(isShow: true)
-        FirebaseManager.shared.updateUserProfile(user) { [weak self] success, message in
-            self?.showLoading(isShow: false)
-            guard let strongSelf = self else { return }
-            if success{
-                strongSelf.showAlert(title: "Thành công", message: message ?? "Cập nhật thành công")
-            }else{
-                strongSelf.showAlert(title: "Thất bại", message: message ?? "Cập nhật không thành công")
+        if imageHasChange{
+            if let imageData = self.avatarImage.image?.jpegData(compressionQuality: 0.5){
+                showLoading(isShow: true)
+                FirebaseManager.shared.uploadImage(imageData) {[weak self] status, imageName, url in
+                    guard let self = self else{
+                        self?.showLoading(isShow: false)
+                        return
+                    }
+                  
+                    values.updateValue(imageName ?? "", forKey: "photoName")
+                    values.updateValue(url ?? "", forKey: "photoUrl")
+                    
+                    FirebaseManager.shared.updateUserProfile(values) { success, user, message in
+                        if success{
+                            self.updateUser(user)
+                            UserDefaultsManager.shared.save(user)
+                            self.showLoading(isShow: false)
+                            self.showAlert(title: "Thành công", message: message)
+                        }else{
+                            self.showLoading(isShow: false)
+                            self.showAlert(title: "Thất bại", message: message)
+                        }
+                    }
+                }
+            }
+        }else{
+            showLoading(isShow: true)
+            FirebaseManager.shared.updateUserProfile(values) {[weak self] success, userNoImage, message in
+                self?.showLoading(isShow: false)
+                guard let strongSelf = self else { return }
+                if success{
+                    strongSelf.updateUser(userNoImage)
+                    UserDefaultsManager.shared.save(userNoImage)
+                    strongSelf.showAlert(title: "Thành công", message: message)
+                }else{
+                    strongSelf.showAlert(title: "Thất bại", message: message)
+                }
             }
         }
     }
+    
     func getValue(item: ProfileItem) -> String{
         let profile = items.first(where: {$0.item == item})
         return profile?.value ?? ""

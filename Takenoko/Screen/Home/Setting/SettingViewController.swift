@@ -83,6 +83,7 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
             .filter({$0.isKeyWindow}).first
         
         keyWindow?.rootViewController = navigationVC
+//        keyWindow?.makeKeyAndVisible()
     }
     
     func handleLogout() {

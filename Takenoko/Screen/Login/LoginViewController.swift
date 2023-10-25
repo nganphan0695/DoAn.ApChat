@@ -21,8 +21,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var appleView: UIView!
     @IBOutlet weak var googleView: UIView!
     @IBOutlet weak var facebookView: UIView!
-    
     @IBOutlet weak var loginBt: UIButton!
+    
+    var email: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -30,6 +32,7 @@ class LoginViewController: UIViewController {
         setupPasswordView()
         setUpView()
         loginBt.isEnabled = false
+        emailText.text = email
     }
     
     func setUpView(){
@@ -173,17 +176,37 @@ extension LoginViewController{
         let email: String = emailText.text ?? ""
         let password: String = passwordText.text ?? ""
         
+        showLoading(isShow: true)
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-            guard let strongSelf = self else { return }
+            guard let strongSelf = self else {
+                self?.showLoading(isShow: false)
+                return
+            }
             guard error == nil else{
+                self?.showLoading(isShow: false)
                 let alertVC = UIAlertController(title: "Lỗi", message: error?.localizedDescription, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .cancel)
                 alertVC.addAction(okAction)
                 strongSelf.present(alertVC, animated: true)
                 return
             }
-//            let user = authResult?.user
-            strongSelf.goToHome()
+            UserDefaultsManager.shared.setIsLogin(true)
+            if let userEmail = authResult?.user.email?.safeEmail(){
+                FirebaseManager.shared.getUserProfile(userEmail) { user in
+            
+                    if let user = user{
+                        self?.showLoading(isShow: false)
+                        UserDefaultsManager.shared.save(user)
+                        strongSelf.goToHome()
+                    }else{
+                        self?.showLoading(isShow: false)
+                        strongSelf.goToHome()
+                    }
+                }
+            }else{
+                self?.showLoading(isShow: false)
+                strongSelf.goToHome()
+            }
         }
     }
 }
