@@ -43,7 +43,7 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i51-Us-C0Y">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="743.66666666666663"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="755"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdL-Uv-Sd7">
                                     <rect key="frame" x="24" y="24" width="24" height="24"/>
@@ -407,7 +407,10 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87o-zR-WSt">
-                                    <rect key="frame" x="24" y="670" width="345" height="36.666666666666629"/>
+                                    <rect key="frame" x="24" y="670" width="345" height="48"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="NBR-Bq-B4j"/>
+                                    </constraints>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="filled" title="Đăng ký">
                                         <fontDescription key="titleFontDescription" name="Poppins-Bold" family="Poppins" pointSize="16"/>

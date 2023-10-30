@@ -11,4 +11,5 @@ import SwiftHEXColors
 
 struct Colors{
     static let primaryColor = UIColor(hexString: "#24786D")!
+    static let recipentBackgroundColor = UIColor(hexString: "F2F7FB")!
 }

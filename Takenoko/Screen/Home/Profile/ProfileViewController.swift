@@ -64,7 +64,7 @@ class ProfileViewController: UIViewController {
         cameraView.layer.cornerRadius = cameraView.frame.height / 2
     }
     
-    @IBAction func handleCheckmarkBt(_ sender: Any) {
+    @IBAction func handleSaveBt(_ sender: Any) {
         self.view.endEditing(true)
         
         if validate(){

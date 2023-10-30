@@ -208,39 +208,21 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jgi-pA-KtV">
-                                        <rect key="frame" x="345" y="83" width="24" height="24"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WCJ-7c-pme">
-                                                <rect key="frame" x="0.0" y="2.3333333333333321" width="24" height="20.000000000000004"/>
-                                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="24" id="QYh-Mw-3KP"/>
-                                                    <constraint firstAttribute="width" constant="24" id="kL8-RB-ffN"/>
-                                                </constraints>
-                                            </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qli-Tg-hJr">
-                                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <connections>
-                                                    <action selector="handleCheckmarkBt:" destination="slv-py-WXW" eventType="touchUpInside" id="zw9-vT-ZvO"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.14117647059999999" green="0.47058823529999999" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYd-bP-aNa">
+                                        <rect key="frame" x="304" y="83" width="65" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="WCJ-7c-pme" secondAttribute="trailing" id="2Dx-Nv-VNp"/>
-                                            <constraint firstItem="qli-Tg-hJr" firstAttribute="leading" secondItem="Jgi-pA-KtV" secondAttribute="leading" id="7Ym-hW-oKj"/>
-                                            <constraint firstItem="WCJ-7c-pme" firstAttribute="top" secondItem="Jgi-pA-KtV" secondAttribute="top" id="FYM-bi-2bg"/>
-                                            <constraint firstItem="WCJ-7c-pme" firstAttribute="leading" secondItem="Jgi-pA-KtV" secondAttribute="leading" id="Mpm-qe-zVa"/>
-                                            <constraint firstAttribute="bottom" secondItem="qli-Tg-hJr" secondAttribute="bottom" id="Vp0-51-OZN"/>
-                                            <constraint firstAttribute="height" constant="24" id="WH2-eh-Nac"/>
-                                            <constraint firstAttribute="trailing" secondItem="qli-Tg-hJr" secondAttribute="trailing" id="XK6-yA-I2Y"/>
-                                            <constraint firstAttribute="width" constant="24" id="dJn-3w-Ywh"/>
-                                            <constraint firstAttribute="bottom" secondItem="WCJ-7c-pme" secondAttribute="bottom" id="e7S-mQ-UzU"/>
-                                            <constraint firstItem="qli-Tg-hJr" firstAttribute="top" secondItem="Jgi-pA-KtV" secondAttribute="top" id="o4O-Ge-Wa1"/>
+                                            <constraint firstAttribute="height" constant="24" id="W99-Uj-HGR"/>
+                                            <constraint firstAttribute="width" constant="65" id="arD-eB-lk0"/>
                                         </constraints>
-                                    </view>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Lưu">
+                                            <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="handleSaveBt:" destination="slv-py-WXW" eventType="touchUpInside" id="UYu-Hd-uXN"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14117647059999999" green="0.47058823529999999" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -264,12 +246,12 @@
                             <constraint firstItem="5Xb-0r-zGU" firstAttribute="top" secondItem="HQA-0R-zWX" secondAttribute="top" id="25a-KK-ieX"/>
                             <constraint firstItem="aF3-Rl-nXB" firstAttribute="bottom" secondItem="QFk-Cw-TFB" secondAttribute="bottom" id="8ba-GG-LSe"/>
                             <constraint firstItem="QFk-Cw-TFB" firstAttribute="top" secondItem="5Xb-0r-zGU" secondAttribute="bottom" id="Fur-KC-dP8"/>
-                            <constraint firstItem="aF3-Rl-nXB" firstAttribute="trailing" secondItem="Jgi-pA-KtV" secondAttribute="trailing" constant="24" id="LH2-eE-7Cb"/>
                             <constraint firstItem="QFk-Cw-TFB" firstAttribute="leading" secondItem="aF3-Rl-nXB" secondAttribute="leading" id="OmO-QW-fe7"/>
-                            <constraint firstItem="Jgi-pA-KtV" firstAttribute="top" secondItem="aF3-Rl-nXB" secondAttribute="top" constant="24" id="TaR-Um-qzS"/>
                             <constraint firstItem="5Xb-0r-zGU" firstAttribute="leading" secondItem="aF3-Rl-nXB" secondAttribute="leading" id="V3k-WD-GdV"/>
+                            <constraint firstItem="lYd-bP-aNa" firstAttribute="top" secondItem="aF3-Rl-nXB" secondAttribute="top" constant="24" id="VxA-qf-KZC"/>
                             <constraint firstItem="aF3-Rl-nXB" firstAttribute="trailing" secondItem="QFk-Cw-TFB" secondAttribute="trailing" id="Xgf-is-hm4"/>
                             <constraint firstItem="aF3-Rl-nXB" firstAttribute="trailing" secondItem="5Xb-0r-zGU" secondAttribute="trailing" id="bcn-bl-ZVy"/>
+                            <constraint firstItem="aF3-Rl-nXB" firstAttribute="trailing" secondItem="lYd-bP-aNa" secondAttribute="trailing" constant="24" id="upZ-bs-3Sg"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Hồ sơ" image="person.circle" catalog="system" id="xSz-9Y-8Hx"/>
@@ -284,7 +266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZAR-DZ-3Jf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="976" y="-694"/>
+            <point key="canvasLocation" x="974.80916030534343" y="-694.36619718309862"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="i1K-83-nee">
@@ -487,7 +469,6 @@
     <resources>
         <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="camera.fill" catalog="system" width="128" height="93"/>
-        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="message" catalog="system" width="128" height="116"/>
         <image name="person.circle" catalog="system" width="128" height="123"/>

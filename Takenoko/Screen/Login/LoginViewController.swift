@@ -113,8 +113,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func handleForgotPassword(_ sender: Any) {
-        let navigationVC = ForgotPasswordViewController(nibName: "ForgotPasswordViewController", bundle: nil)
-        self.navigationController?.pushViewController(navigationVC, animated: true)
+        let forgotPasswordViewController = ForgotPasswordViewController(nibName: "ForgotPasswordViewController", bundle: nil)
+        forgotPasswordViewController.email = emailText.text
+        self.navigationController?.pushViewController(forgotPasswordViewController, animated: true)
     }
     
     @objc func textFieldDidEditing(_ textField: UITextField){
