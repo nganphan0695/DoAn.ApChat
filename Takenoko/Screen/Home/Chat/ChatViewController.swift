@@ -16,7 +16,7 @@ import Kingfisher
 import SwiftHEXColors
 
 class ChatViewController: MessagesViewController {
-    
+
     private var isSendingPhoto = false {
         didSet {
             messageInputBar.leftStackViewItems.forEach { item in
@@ -32,7 +32,7 @@ class ChatViewController: MessagesViewController {
     private let storage = Storage.storage().reference()
     private var messages: [Message] = []
     private var messageListener: ListenerRegistration?
-    private let user: UserResponse!
+    private let receiver: UserResponse!
     private let currentUser: UserResponse!
     var receptImage: UIImage?
     var senderImage: UIImage?
@@ -41,13 +41,14 @@ class ChatViewController: MessagesViewController {
         messageListener?.remove()
     }
     
-    init(currentUser: UserResponse, user: UserResponse) {
+    init(currentUser: UserResponse, receiver: UserResponse) {
      
-        self.user = user
+        self.receiver = receiver
         self.currentUser = currentUser
         super.init(nibName: nil, bundle: nil)
+        print(self.preferredStatusBarStyle.rawValue)
         
-        if let receptURL = self.user.photoUrl,
+        if let receptURL = self.receiver.photoUrl,
            let url = URL(string: receptURL){
             KingfisherManager.shared.retrieveImage(
                 with: url,
@@ -89,6 +90,10 @@ class ChatViewController: MessagesViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messagesCollectionView.scrollToLastItem(animated: true)
@@ -114,30 +119,30 @@ class ChatViewController: MessagesViewController {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = Colors.primaryColor
         appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationItem.largeTitleDisplayMode = .never
     }
     
     @objc func didClickBack(_ sender: UIBarButtonItem){
         self.navigationController?.popToRootViewController(animated: true)
     }
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         listenToMessages()
-        
-        let name = self.user.name
-        let title = name.isEmpty ? self.user.email : name
+        let name = self.receiver.name
+        let title = name.isEmpty ? self.receiver.email : name
         setNavigationItem()
         navigationItem.title = title
         setUpMessageView()
         addCameraBarButton()
+        print(self.preferredStatusBarStyle.rawValue)
     }
     
     private func listenToMessages() {
         guard let fromId = Auth.auth().currentUser?.uid else { return }
-        let toId = user.uid
+        let toId = receiver.uid
         messageListener?.remove()
         
         messageListener = FirebaseManager.shared.fireStore
@@ -156,27 +161,30 @@ class ChatViewController: MessagesViewController {
                     return
                 }
                 
-                snapshot.documentChanges.forEach { diff in
-                    if (diff.type == .added) {
-                        self?.handleDocumentChange(diff)
+                snapshot.documentChanges.forEach { change in
+                    if (change.type == .added) {
+                        self?.addNewMessage(change)
                     }
                   
-                    if (diff.type == .modified) {
-                        print("Modified message: \(diff.document.data())")
+                    if (change.type == .modified) {
+                        print("Modified message: \(change.document.data())")
                     }
                     
-                    if (diff.type == .removed) {
-                        print("Removed Message: \(diff.document.data())")
+                    if (change.type == .removed) {
+                        self?.deleteMessage(change)
+                        print("Removed Message: \(change.document.data())")
                     }
                 }
             }
     }
     
     private func setUpMessageView() {
-        messageInputBar.inputTextView.tintColor = .blue
+        messageInputBar.inputTextView.tintColor = Colors.primaryColor
         messageInputBar.sendButton.setTitle("Gửi", for: .normal)
+        messageInputBar.sendButton.setTitleColor(Colors.primaryColor, for: .normal)
         messageInputBar.delegate = self
         messagesCollectionView.messagesDataSource = self
+        messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         scrollsToLastItemOnKeyboardBeginsEditing = true
@@ -198,7 +206,6 @@ class ChatViewController: MessagesViewController {
         messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
     }
     
-    // MARK: - Actions
     @objc private func cameraButtonPressed() {
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -210,7 +217,7 @@ class ChatViewController: MessagesViewController {
     private func save(_ message: Message) {
         FirebaseManager.shared.sendMessage(
             sender: currentUser,
-            recipient: self.user,
+            recipient: self.receiver,
             message: message
         ) {
             print("Gửi tin nhắn thành công")
@@ -228,9 +235,28 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.reloadData()
     }
     
-    private func handleDocumentChange(_ change: DocumentChange) {
+    private func addNewMessage(_ change: DocumentChange) {
         guard let message = Message(document: change.document) else { return }
         insertNewMessage(message)
+    }
+    
+    private func deleteMessage(_ change: DocumentChange){
+        guard let message = Message(document: change.document) else { return }
+        if let index = self.messages.firstIndex(where: { element in
+            return element.id == message.id
+        }){
+            messages.remove(at: index)
+            messagesCollectionView.reloadData()
+        }
+        
+        if messages.count == 0{
+            FirebaseManager.shared.saveRecentMessage(
+                self.currentUser,
+                recipient: self.receiver,
+                text: ""
+            )
+        }
+
     }
     
     private func sendPhoto(_ image: UIImage) {
@@ -240,7 +266,7 @@ class ChatViewController: MessagesViewController {
                 guard let self = self else { return }
                 if let urlString = url,
                    let downloadURL = URL(string: urlString) {
-                    var message = Message(user: currentUser, image: image)
+                    var message = Message(user: self.currentUser, image: image)
                     message.downloadURL = downloadURL
                     self.save(message)
                     self.messagesCollectionView.scrollToLastItem()
@@ -256,6 +282,7 @@ class ChatViewController: MessagesViewController {
 
 // MARK: - MessagesDisplayDelegate
 extension ChatViewController: MessagesDisplayDelegate {
+    
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
         return isFromCurrentSender(message: message) ? Colors.primaryColor : Colors.recipentBackgroundColor
     }
@@ -274,7 +301,7 @@ extension ChatViewController: MessagesDisplayDelegate {
         let lastName = sender.displayName.components(separatedBy: " ").last?.uppercased()
         let initials = "\(firstName?.first ?? "A")\(lastName?.first ?? "A")"
         
-        if user.uid == sender.senderId{
+        if receiver.uid == sender.senderId{
             return Avatar(image:self.receptImage, initials: initials)
         }else{
             return Avatar(image:self.senderImage, initials: initials)
@@ -339,6 +366,93 @@ extension ChatViewController: MessagesDataSource {
                 .font: UIFont.preferredFont(forTextStyle: .caption1),
                 .foregroundColor: UIColor(white: 0.3, alpha: 1)
             ])
+    }
+}
+
+extension ChatViewController: MessageCellDelegate {
+    
+    func didTapAvatar(in cell: MessageCollectionViewCell) {
+        if let indexPath = self.messagesCollectionView.indexPath(for: cell){
+            let message = self.messages[indexPath.section]
+            if message.sender.senderId == receiver.uid{
+                let receiverProfileViewController = ReceiverProfileViewController(nibName: "ReceiverProfileViewController", bundle: nil)
+                receiverProfileViewController.receiverEmail = receiver.email
+                self.navigationController?.pushViewController(receiverProfileViewController, animated: true)
+            }
+        }
+    }
+
+    
+    func didTapMessage(in cell: MessageCollectionViewCell) {
+        print("Message tapped")
+        self.messageInputBar.inputTextView.resignFirstResponder()
+        let alertVC = UIAlertController(
+            title: nil,
+            message: "Xoá tin nhắn?",
+            preferredStyle: .alert
+        )
+        let delete = UIAlertAction(title: "Xoá", style: .destructive){ action in
+            if let indexPath = self.messagesCollectionView.indexPath(for: cell){
+                let message = self.messages[indexPath.section]
+                self.deleteMessage(message)
+            }
+        }
+        let cancel = UIAlertAction(title: "Huỷ", style: .cancel)
+        alertVC.addAction(delete)
+        alertVC.addAction(cancel)
+        self.present(alertVC, animated: true)
+    }
+    
+    private func deleteMessage(_ message: Message){
+        let userId = self.currentUser.uid
+        let receiverId = self.receiver.uid
+        FirebaseManager.shared.fireStore
+            .collection(Constants.messages)
+            .document(userId)
+            .collection(receiverId)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    if let documents = querySnapshot?.documents{
+                        for document in documents {
+                            if document.documentID == message.id{
+                                document.reference.delete()
+                            }
+                        }
+                    }
+                }
+            }
+    }
+    
+    func didTapImage(in cell: MessageCollectionViewCell) {
+        print("Image tapped")
+        self.messageInputBar.inputTextView.resignFirstResponder()
+        let alertVC = UIAlertController(
+            title: nil,
+            message: "Xoá tin nhắn ảnh?",
+            preferredStyle: .alert
+        )
+        let delete = UIAlertAction(title: "Xoá", style: .destructive){ action in
+            if let indexPath = self.messagesCollectionView.indexPath(for: cell){
+                let message = self.messages[indexPath.section]
+                self.deleteMessage(message)
+            }
+        }
+        let cancel = UIAlertAction(title: "Huỷ", style: .cancel)
+        alertVC.addAction(delete)
+        alertVC.addAction(cancel)
+        self.present(alertVC, animated: true)
+    }
+    
+    func didTapMessageTopLabel(in _: MessageCollectionViewCell) {
+        self.messageInputBar.inputTextView.resignFirstResponder()
+        print("Top message label tapped")
+    }
+    
+    func didTapBackground(in cell: MessageCollectionViewCell) {
+        print("Background tapped")
+        self.messageInputBar.inputTextView.resignFirstResponder()
     }
 }
 

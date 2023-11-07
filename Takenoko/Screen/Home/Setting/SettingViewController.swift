@@ -11,13 +11,17 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+          return .lightContent
+    }
     
     private var items = [SettingItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: true)
         setupView()
-        items = [.notification, .security, .help, .darkMode, .logOut]
+        items = [.notification, .resetPassword, .introduce, .darkMode, .logOut]
         setUpTableView()
     }
     
@@ -26,6 +30,24 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
         avatarView.layer.borderWidth = 1
         avatarView.layer.borderColor = UIColor.white.cgColor
         avatarView.clipsToBounds = true
+        
+        guard let email = Auth.auth().currentUser?.email else {return}
+        showLoading(isShow: true)
+        FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
+            DispatchQueue.main.async {
+                if let photoUrl = user?.photoUrl, let url = URL(string: photoUrl){
+                    self?.avatarImage.kf.setImage(with: url)
+                }
+                let userName = user?.name
+                if userName != nil && !userName!.isEmpty{
+                    self?.userNameLabel.text = userName
+                }else{
+                    self?.userNameLabel.text = email
+                }
+                
+            }
+                self?.showLoading(isShow: false)
+        })
     }
     
     private func setUpTableView(){
@@ -53,19 +75,21 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
         let title = item.tittle()
         let image = item.image()
         let isShowBt = item.isHiddenButton()
-//        let isShowSwitch = item.isHiddenSwitch()
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell", for: indexPath) as! SettingTableViewCell
         cell.titleLabel.text = title
         cell.iconImageView.image = image
         cell.buttonView.isHidden = isShowBt
-//        cell.switchView.isHidden = isShowSwitch
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             let item = items[indexPath.row]
             switch item{
+            case .resetPassword:
+                handleResetPassword()
+            case .introduce:
+                handleIntroduce()
             case .logOut:
                 handleLogout()
             default:
@@ -83,16 +107,26 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
             .filter({$0.isKeyWindow}).first
         
         keyWindow?.rootViewController = navigationVC
-//        keyWindow?.makeKeyAndVisible()
+        keyWindow?.makeKeyAndVisible()
     }
     
     func handleLogout() {
         do {
             try Auth.auth().signOut()
+            UserDefaultsManager.shared.remove()
             goToNavigationOnBoard()
         } catch let signOutError as NSError {
             showAlert(title: "Lỗi", message: signOutError.localizedDescription)
         }
     }
     
+    func handleResetPassword(){
+        let forgotPasswordViewController = ForgotPasswordViewController(nibName: "ForgotPasswordViewController", bundle: nil)
+        self.navigationController?.pushViewController(forgotPasswordViewController, animated: true)
+    }
+    
+    func handleIntroduce(){
+        let introduceViewController = IntroduceViewController(nibName: "IntroduceViewController", bundle: nil)
+        self.navigationController?.pushViewController(introduceViewController, animated: true)
+    }
 }

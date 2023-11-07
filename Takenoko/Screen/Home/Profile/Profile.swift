@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum ProfileItem: Int {
     case name = 0
@@ -110,10 +111,3 @@ struct UserResponse: Codable{
     }
 }
 
-extension String{
-    func safeEmail() -> Self{
-        let safeEmail = self.replacingOccurrences(of: ".", with: "_")
-        let replace = safeEmail.replacingOccurrences(of: "@", with: "-")
-        return replace
-    }
-}

@@ -33,6 +33,7 @@ class LoginViewController: UIViewController {
         setUpView()
         loginBt.isEnabled = false
         emailText.text = email
+        cursorColor()
     }
     
     func setUpView(){
@@ -192,7 +193,7 @@ extension LoginViewController{
                 return
             }
             UserDefaultsManager.shared.setIsLogin(true)
-            if let userEmail = authResult?.user.email?.safeEmail(){
+            if let userEmail = authResult?.user.email{
                 FirebaseManager.shared.getUserProfile(userEmail) { user in
             
                     if let user = user{

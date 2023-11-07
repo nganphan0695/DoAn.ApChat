@@ -24,14 +24,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="711"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OnBoarding" translatesAutoresizingMaskIntoConstraints="NO" id="hMa-y0-iGf">
-                                                <rect key="frame" x="71.666666666666686" y="100" width="250" height="250"/>
+                                                <rect key="frame" x="21.666666666666657" y="50" width="350" height="350"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="250" id="JdK-L2-Bds"/>
-                                                    <constraint firstAttribute="width" constant="250" id="Owv-eG-pzM"/>
+                                                    <constraint firstAttribute="height" constant="350" id="JdK-L2-Bds"/>
+                                                    <constraint firstAttribute="width" constant="350" id="Owv-eG-pzM"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hub-3c-OfD">
-                                                <rect key="frame" x="24" y="450" width="345" height="48"/>
+                                                <rect key="frame" x="24" y="420" width="345" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="un5-ym-SVx"/>
                                                 </constraints>
@@ -45,7 +45,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7h-KL-rYm">
-                                                <rect key="frame" x="24" y="528" width="345" height="48"/>
+                                                <rect key="frame" x="24" y="498" width="345" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="RTU-1P-jqb"/>
                                                 </constraints>
@@ -170,15 +170,15 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="g7h-KL-rYm" firstAttribute="top" secondItem="hub-3c-OfD" secondAttribute="bottom" constant="30" id="4B1-v6-Zts"/>
-                                            <constraint firstItem="hMa-y0-iGf" firstAttribute="top" secondItem="ieR-rs-iU3" secondAttribute="top" constant="100" id="4Ks-Vl-xNx"/>
+                                            <constraint firstItem="hMa-y0-iGf" firstAttribute="top" secondItem="ieR-rs-iU3" secondAttribute="top" constant="50" id="4Ks-Vl-xNx"/>
                                             <constraint firstAttribute="bottom" secondItem="PqB-RK-XcE" secondAttribute="bottom" constant="37" id="4kk-gK-Lj9"/>
                                             <constraint firstItem="hMa-y0-iGf" firstAttribute="centerX" secondItem="ieR-rs-iU3" secondAttribute="centerX" id="5yB-XU-eWp"/>
                                             <constraint firstItem="PqB-RK-XcE" firstAttribute="centerX" secondItem="ieR-rs-iU3" secondAttribute="centerX" id="6BM-GL-pqr"/>
-                                            <constraint firstItem="PqB-RK-XcE" firstAttribute="top" secondItem="g7h-KL-rYm" secondAttribute="bottom" constant="50" id="Wsz-4j-hk0"/>
+                                            <constraint firstItem="PqB-RK-XcE" firstAttribute="top" secondItem="g7h-KL-rYm" secondAttribute="bottom" constant="80" id="Wsz-4j-hk0"/>
                                             <constraint firstItem="hub-3c-OfD" firstAttribute="leading" secondItem="ieR-rs-iU3" secondAttribute="leading" constant="24" id="eCx-Ih-iy2"/>
                                             <constraint firstItem="g7h-KL-rYm" firstAttribute="leading" secondItem="ieR-rs-iU3" secondAttribute="leading" constant="24" id="fYn-Vj-yS6"/>
                                             <constraint firstAttribute="trailing" secondItem="g7h-KL-rYm" secondAttribute="trailing" constant="24" id="nB8-BW-sQO"/>
-                                            <constraint firstItem="hub-3c-OfD" firstAttribute="top" secondItem="hMa-y0-iGf" secondAttribute="bottom" constant="100" id="ohI-6f-E9J"/>
+                                            <constraint firstItem="hub-3c-OfD" firstAttribute="top" secondItem="hMa-y0-iGf" secondAttribute="bottom" constant="20" id="ohI-6f-E9J"/>
                                             <constraint firstAttribute="trailing" secondItem="hub-3c-OfD" secondAttribute="trailing" constant="24" id="z1g-HL-0bI"/>
                                         </constraints>
                                     </view>
@@ -236,7 +236,7 @@
     </scenes>
     <resources>
         <image name="Ic_FB" width="24.333333969116211" height="24"/>
-        <image name="OnBoarding" width="128" height="128"/>
+        <image name="OnBoarding" width="4675" height="4675"/>
         <image name="ic_apple" width="20.666666030883789" height="24.333333969116211"/>
         <image name="ic_google" width="8.3333330154418945" height="8"/>
         <systemColor name="systemBackgroundColor">

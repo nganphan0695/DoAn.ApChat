@@ -10,8 +10,8 @@ import UIKit
 
 enum SettingItem: Int {
     case notification = 0
-    case security
-    case help
+    case resetPassword
+    case introduce
     case darkMode
     case logOut
     
@@ -19,10 +19,10 @@ enum SettingItem: Int {
         switch self{
         case .notification:
             return "Thông báo"
-        case .security:
-            return "Bảo mật"
-        case .help:
-            return "Trợ giúp"
+        case .resetPassword:
+            return "Đổi mật khẩu"
+        case .introduce:
+            return "Giới thiệu"
         case .darkMode:
             return "Giao diện"
         case .logOut:
@@ -34,9 +34,9 @@ enum SettingItem: Int {
         switch self{
         case .notification:
             return UIImage(systemName: "bell")
-        case .security:
+        case .resetPassword:
             return UIImage(systemName: "lock")
-        case .help:
+        case .introduce:
             return UIImage(systemName: "questionmark.circle")
         case .darkMode:
             return UIImage(systemName: "moon")
@@ -47,7 +47,7 @@ enum SettingItem: Int {
     
     func isHiddenButton() -> Bool{
         switch self{
-        case .notification, .security, .help:
+        case .notification, .resetPassword, .introduce:
             return false
         default:
             return true

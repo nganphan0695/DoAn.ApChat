@@ -12,6 +12,7 @@ class ForgotPasswordViewController: UIViewController {
     @IBOutlet weak var googleView: UIView!
     @IBOutlet weak var appleView: UIView!
     @IBOutlet weak var facebookView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var resetPasswordBt: UIButton!
     @IBOutlet weak var emailErrorLabel: UILabel!
@@ -28,6 +29,7 @@ class ForgotPasswordViewController: UIViewController {
         setUpView()
         setupEmailView()
         emailText.text = email
+        cursorColor()
     }
     
     func setUpView(){
@@ -126,10 +128,8 @@ class ForgotPasswordViewController: UIViewController {
                 message: "Vui lòng kiểm tra email để đặt mật khẩu mới",
                 preferredStyle: .alert
             )
-            let okAction = UIAlertAction(title: "OK", style: .destructive){action in
-                let loginViewController = LoginViewController(nibName: "LoginViewController", bundle: nil)
-                loginViewController.email = strongSelf.emailText.text
-                strongSelf.navigationController?.pushViewController(loginViewController, animated: true)
+            let okAction = UIAlertAction(title: "OK", style: .cancel){ action in
+                strongSelf.navigationController?.popViewController(animated: true)
             }
             alertVC.addAction(okAction)
             strongSelf.present(alertVC, animated: true)

@@ -18,6 +18,7 @@ extension UIViewController{
         )
         let okAction = UIAlertAction(title: "OK", style: .cancel)
         alertVC.addAction(okAction)
+        alertVC.view.tintColor = Colors.primaryColor
         present(alertVC, animated: true)
     }
     
@@ -35,4 +36,17 @@ extension UIViewController{
         let emailTest = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
         return emailTest.evaluate(with: email)
     }
+    
+    func cursorColor(){
+        UITextField.appearance().tintColor = Colors.primaryColor
+    }
 }
+
+extension UINavigationController {
+    override open var childForStatusBarStyle: UIViewController? {
+        return topViewController
+    }
+}
+
+
+

@@ -129,6 +129,7 @@
                     <tabBarItem key="tabBarItem" title="Tin nhắn" image="message" catalog="system" id="UxC-LL-il9"/>
                     <connections>
                         <outlet property="addFriendView" destination="eqd-ep-sUC" id="83S-LO-thv"/>
+                        <outlet property="avatarImage" destination="wBm-yG-Z51" id="oKZ-Oo-cfq"/>
                         <outlet property="plusView" destination="weh-IT-koD" id="MH1-Xq-oWH"/>
                         <outlet property="searchBar" destination="ZJx-ZV-7dk" id="cK7-ZY-dlb"/>
                         <outlet property="tableView" destination="7nu-Ge-zeA" id="5HF-g7-hdt"/>
@@ -208,21 +209,6 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYd-bP-aNa">
-                                        <rect key="frame" x="304" y="83" width="65" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="W99-Uj-HGR"/>
-                                            <constraint firstAttribute="width" constant="65" id="arD-eB-lk0"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Lưu">
-                                            <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="handleSaveBt:" destination="slv-py-WXW" eventType="touchUpInside" id="UYu-Hd-uXN"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14117647059999999" green="0.47058823529999999" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -235,23 +221,38 @@
                                     <constraint firstItem="sMr-Zb-Kr8" firstAttribute="bottom" secondItem="MSj-df-JK8" secondAttribute="bottom" id="dWf-Sz-dWS"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QFk-Cw-TFB">
-                                <rect key="frame" x="0.0" y="250" width="393" height="519"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QFk-Cw-TFB" customClass="TPKeyboardAvoidingTableView" customModule="Takenoko" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="250" width="393" height="456"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pvi-Ma-11d">
+                                <rect key="frame" x="24" y="716" width="345" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="f7r-9P-Oh7"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Lưu">
+                                    <fontDescription key="titleFontDescription" name="Poppins-Bold" family="Poppins" pointSize="16"/>
+                                    <color key="baseBackgroundColor" red="0.14117647059999999" green="0.47058823529999999" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="handleSaveBt:" destination="slv-py-WXW" eventType="touchUpInside" id="C8G-nz-zoP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aF3-Rl-nXB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="5Xb-0r-zGU" firstAttribute="top" secondItem="HQA-0R-zWX" secondAttribute="top" id="25a-KK-ieX"/>
-                            <constraint firstItem="aF3-Rl-nXB" firstAttribute="bottom" secondItem="QFk-Cw-TFB" secondAttribute="bottom" id="8ba-GG-LSe"/>
+                            <constraint firstItem="aF3-Rl-nXB" firstAttribute="trailing" secondItem="pvi-Ma-11d" secondAttribute="trailing" constant="24" id="AX4-9m-Jvl"/>
                             <constraint firstItem="QFk-Cw-TFB" firstAttribute="top" secondItem="5Xb-0r-zGU" secondAttribute="bottom" id="Fur-KC-dP8"/>
+                            <constraint firstItem="pvi-Ma-11d" firstAttribute="top" secondItem="QFk-Cw-TFB" secondAttribute="bottom" constant="10" id="Gsr-YB-PL2"/>
                             <constraint firstItem="QFk-Cw-TFB" firstAttribute="leading" secondItem="aF3-Rl-nXB" secondAttribute="leading" id="OmO-QW-fe7"/>
                             <constraint firstItem="5Xb-0r-zGU" firstAttribute="leading" secondItem="aF3-Rl-nXB" secondAttribute="leading" id="V3k-WD-GdV"/>
-                            <constraint firstItem="lYd-bP-aNa" firstAttribute="top" secondItem="aF3-Rl-nXB" secondAttribute="top" constant="24" id="VxA-qf-KZC"/>
                             <constraint firstItem="aF3-Rl-nXB" firstAttribute="trailing" secondItem="QFk-Cw-TFB" secondAttribute="trailing" id="Xgf-is-hm4"/>
                             <constraint firstItem="aF3-Rl-nXB" firstAttribute="trailing" secondItem="5Xb-0r-zGU" secondAttribute="trailing" id="bcn-bl-ZVy"/>
-                            <constraint firstItem="aF3-Rl-nXB" firstAttribute="trailing" secondItem="lYd-bP-aNa" secondAttribute="trailing" constant="24" id="upZ-bs-3Sg"/>
+                            <constraint firstItem="pvi-Ma-11d" firstAttribute="leading" secondItem="aF3-Rl-nXB" secondAttribute="leading" constant="24" id="blg-1q-741"/>
+                            <constraint firstItem="aF3-Rl-nXB" firstAttribute="bottom" secondItem="pvi-Ma-11d" secondAttribute="bottom" constant="5" id="j7P-Jn-UYD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Hồ sơ" image="person.circle" catalog="system" id="xSz-9Y-8Hx"/>
@@ -380,7 +381,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tin nhắn mới" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CyN-x6-YJY">
-                                        <rect key="frame" x="115.66666666666669" y="70" width="162" height="35"/>
+                                        <rect key="frame" x="115.66666666666669" y="77.666666666666671" width="162" height="35"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -398,7 +399,7 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.backward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tPY-xX-6Li">
                                                 <rect key="frame" x="0.0" y="3" width="24" height="18.333333333333332"/>
-                                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="2xf-gR-d1Z"/>
                                                     <constraint firstAttribute="height" constant="24" id="QbA-yI-gfs"/>
@@ -431,9 +432,9 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Xsz-Lx-fBK" secondAttribute="trailing" constant="24" id="5rw-Pl-QhL"/>
                                     <constraint firstItem="Xsz-Lx-fBK" firstAttribute="leading" secondItem="wAt-HD-za8" secondAttribute="leading" constant="24" id="IOh-2x-5hD"/>
-                                    <constraint firstItem="CyN-x6-YJY" firstAttribute="top" secondItem="wAt-HD-za8" secondAttribute="top" constant="70" id="VVk-yR-7lF"/>
                                     <constraint firstItem="CyN-x6-YJY" firstAttribute="centerX" secondItem="wAt-HD-za8" secondAttribute="centerX" id="ejn-aj-U56"/>
                                     <constraint firstAttribute="bottom" secondItem="Xsz-Lx-fBK" secondAttribute="bottom" constant="15" id="gQk-G5-ttX"/>
+                                    <constraint firstItem="CyN-x6-YJY" firstAttribute="centerY" secondItem="bGz-ey-RBa" secondAttribute="centerY" id="kXQ-8N-Sjn"/>
                                     <constraint firstAttribute="height" constant="200" id="nXC-bT-nan"/>
                                 </constraints>
                             </view>

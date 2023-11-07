@@ -7,7 +7,6 @@
 
 import Foundation
 import FirebaseAuth
-import FirebaseDatabase
 import FirebaseStorage
 import FirebaseFirestore
 
@@ -28,18 +27,18 @@ struct Constants {
     static let conversations = "conversations"
     static let created = "created"
     static let isLogin = "isLogin"
+    static let senderName = "senderName"
+    static let senderId = "senderId"
 }
 
 class FirebaseManager{
     static let shared = FirebaseManager()
-    let database = Database.database().reference()
     let storage = Storage.storage().reference()
     let fireStore = Firestore.firestore()
     
     func insertUser(_ user: UserResponse){
         guard let email = Auth.auth().currentUser?.email else { return }
-        
-        database.child("\(Constants.users)/\(email.safeEmail())").setValue([
+        let data: [String: Any] = [
             "uid": user.uid,
             "name": user.name,
             "email": user.email,
@@ -47,8 +46,9 @@ class FirebaseManager{
             "birthday": user.birthday,
             "phone": user.phone,
             "address": user.address,
-            "photoUrl": user.photoUrl
-        ])
+            "photoUrl": user.photoUrl ?? ""
+        ]
+        fireStore.collection(Constants.users).document(email).setData(data)
     }
     
     func updateUserProfile(
@@ -56,9 +56,7 @@ class FirebaseManager{
         completion: @escaping(Bool, UserResponse?, String?) -> Void
     ){
         guard let email = Auth.auth().currentUser?.email else { return}
-        
-        database.child(Constants.users).child(email.safeEmail()).updateChildValues(values){
-            (error:Error?, ref:DatabaseReference) in
+        fireStore.collection(Constants.users).document(email).updateData(values) { error in
             if let error = error {
                 print("Data could not be saved: \(error).")
                 completion(false,nil, "Cập nhật không thành công\n Lỗi: \(error.localizedDescription)")
@@ -76,62 +74,32 @@ class FirebaseManager{
     }
     
     func getUserProfile(_ email: String, completion: @escaping(UserResponse?) -> Void){
-        database.child("\(Constants.users)/\(email.safeEmail())").getData { error, snapshot in
-            guard error == nil else {
-              print(error!.localizedDescription)
-                completion(nil)
-              return
-            }
-            
-            guard let value = snapshot?.value, let exists = snapshot?.exists(), exists else {
-                completion(nil)
-                return
-            }
-            
-            guard let data = try? JSONSerialization.data(withJSONObject: value as Any, options: []) else {
-                completion(nil)
-                return
-            }
-            do {
-                let user = try JSONDecoder().decode(UserResponse.self, from: data)
+        fireStore.collection(Constants.users).document(email).getDocument { document, error in
+            if let document = document, document.exists, let data = document.data() {
+                let user = UserResponse(dict: data)
                 completion(user)
-            } catch let error{
-                print(error.localizedDescription)
+            } else {
                 completion(nil)
             }
         }
     }
     
     func getAllUser(_ completion: @escaping([UserResponse]) -> Void){
-        database.child(Constants.users).getData { error, snapshot in
-            guard error == nil else {
-              print(error!.localizedDescription)
-                completion([])
-              return
-            }
-            
-            guard let snapshot = snapshot, snapshot.exists() else {
-                completion([])
-                return
-            }
-            
-            guard let allObjects = snapshot.value as? [String : Any], allObjects.count > 0 else {
-                completion([])
-                return
-            }
-            
+        fireStore.collection(Constants.users).getDocuments { document, error in
             var users = [UserResponse]()
-            let userId = Auth.auth().currentUser?.uid
-            
-            allObjects.forEach { key, value in
-                if let object = value as? [String: Any]{
-                    if let uid = object["uid"] as? String, uid != userId{
-                        let user = UserResponse(dict: object)
+            if let document = document {
+                document.documents.forEach { snapshot in
+                    let data = snapshot.data()
+                    let user = UserResponse(dict: data)
+                    let uid = Auth.auth().currentUser?.uid
+                    if user.uid != uid {
                         users.append(user)
                     }
                 }
+                completion(users)
+            } else {
+                completion([])
             }
-            completion(users)
         }
     }
     

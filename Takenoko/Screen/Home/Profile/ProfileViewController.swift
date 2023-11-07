@@ -16,7 +16,10 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var avatarView: UIView!
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+          return .lightContent
+    }
+
     var imagePickUp = UIImagePickerController()
     var imageHasChange: Bool = false
     
@@ -26,6 +29,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupTableView()
+        cursorColor()
         
         guard let email = Auth.auth().currentUser?.email else {return}
         showLoading(isShow: true)
@@ -119,19 +123,15 @@ class ProfileViewController: UIViewController {
         }
         return cell
     }
-
     
     @IBAction func cameraButton(_ sender: Any) {
         showActionSheet()
     }
-}
-
-extension ProfileViewController{
+    
     private func showActionSheet(){
         let alertVC = UIAlertController(title: nil, message: "Chọn ảnh", preferredStyle: .actionSheet)
         
         let camera = UIAlertAction(title: "Camera", style: .default) { action in
-            print("camera")
         }
         alertVC.addAction(camera)
         
@@ -158,6 +158,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         self.avatarImage.image = image
         imagePickUp.dismiss(animated: true, completion: { () -> Void in
+            self.imageHasChange = true
         })
     }
 
@@ -238,11 +239,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
     
     func setupTableView(){
         tableView.dataSource = self
-        
         tableView.delegate = self
-        
         tableView.separatorStyle = .none
-        
         let cell = UINib(nibName: "ProfileTableViewCell", bundle: nil)
         tableView.register(cell, forCellReuseIdentifier: "ProfileTableViewCell")
     }
@@ -259,13 +257,15 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
         let profile = items[indexPath.row]
         let title = profile.item.tittle()
         let isShowRequired = profile.item.isHiddenRequired()
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell", for: indexPath) as! ProfileTableViewCell
         cell.textField.text = profile.value
         cell.titleLabel.text = title
         cell.requiredlabel.isHidden = isShowRequired
-        
         cell.textField.delegate = self
+        if profile.item == .gender{
+            cell.setupPicker()
+            cell.lastSelected = profile.value
+        }
         return cell
     }
 }
@@ -276,9 +276,10 @@ extension ProfileViewController: UITextFieldDelegate{
         if let indexPath = self.tableView.indexPathForRow(at: pointInTable){
             let profile = items[indexPath.row]
             guard let text = textField.text else {return}
-            
             profile.value = text
         }
     }
 }
+
+
 

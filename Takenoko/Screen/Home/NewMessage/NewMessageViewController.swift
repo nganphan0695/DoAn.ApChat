@@ -13,6 +13,10 @@ class NewMessageViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+          return .lightContent
+    }
+    
     var users = [UserResponse]()
     var filteredUsers = [UserResponse]()
     
@@ -76,9 +80,9 @@ extension NewMessageViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let user = self.users[indexPath.row]
+        let receiver = self.filteredUsers[indexPath.row]
         guard let currentUser = UserDefaultsManager.shared.getUser() else { return }
-        let chatViewController = ChatViewController(currentUser: currentUser, user: user)
+        let chatViewController = ChatViewController(currentUser: currentUser, receiver: receiver)
         self.navigationController?.pushViewController(chatViewController, animated: true)
     }
 }

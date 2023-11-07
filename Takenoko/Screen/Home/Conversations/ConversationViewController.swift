@@ -14,9 +14,16 @@ class ConversationViewController: UIViewController {
     @IBOutlet weak var addFriendView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var plusView: UIView!
+    @IBOutlet weak var avatarImage: UIImageView!
     
     var conversations = [Conversation]()
     var filters = [Conversation]()
+    
+    private var dispatchGroup = DispatchGroup()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+          return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +46,15 @@ class ConversationViewController: UIViewController {
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.clear
         plusView.layer.cornerRadius = plusView.frame.height / 2
         plusView.clipsToBounds = true
+        
+        guard let email = Auth.auth().currentUser?.email else {return}
+        showLoading(isShow: true)
+        FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
+            if let photoUrl = user?.photoUrl, let url = URL(string: photoUrl){
+                self?.avatarImage.kf.setImage(with: url)
+            }
+            self?.showLoading(isShow: false)
+        })
     }
     
     func getAllConversation(){
@@ -60,44 +76,79 @@ class ConversationViewController: UIViewController {
                 }
                 
                 guard let self = self else { return }
-                
-                querySnapshot?.documentChanges.forEach(
-                    { change in
+                querySnapshot?.documentChanges.forEach({ change in
+                    switch change.type{
+                    case .added:
+                        self.addConversation(change)
                         
-                        let docId = change.document.documentID
-                        if let index = self.conversations.firstIndex(where: { rm in
-                            return rm.id == docId
-                        }) {
-                            self.conversations.remove(at: index)
-                        }
+                    case .removed:
+                        self.removeConversation(change)
+                        self.tableView.reloadData()
                         
-                        let dict = change.document.data()
-                        guard let text = dict[Constants.text] as? String else { return }
-                        guard let email = dict[Constants.email] as? String else { return }
-                        guard let fromId = dict[Constants.fromId] as? String else { return }
-                        guard let toId = dict[Constants.toId] as? String else { return }
-                        guard let timestamp = dict[Constants.timestamp] as? Timestamp else { return }
-                        let photoUrl = dict[Constants.photoURL] as? String
-                        let name = dict[Constants.name] as? String
+                    case .modified:
+                        self.modifiedConversation(change)
                         
-                        let conversation = Conversation(
-                            id: docId,
-                            text: text,
-                            email: email,
-                            fromId: fromId,
-                            toId: toId,
-                            photoUrl: photoUrl,
-                            timeStamp: timestamp,
-                            name: name
-                        )
+                    default:
+                        break
                         
-                        self.conversations.insert(conversation, at: 0)
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
                     }
-                )
+                })
             }
+    }
+    
+    func addConversation(_ change: DocumentChange){
+        if let conversation = createConversation(change){
+            self.conversations.insert(conversation, at: 0)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func createConversation(_ change: DocumentChange) -> Conversation? {
+        let documentID = change.document.documentID
+        let dict = change.document.data()
+        guard let text = dict[Constants.text] as? String else { return nil }
+        guard let email = dict[Constants.email] as? String else { return nil }
+        guard let fromId = dict[Constants.fromId] as? String else { return nil }
+        guard let toId = dict[Constants.toId] as? String else { return nil }
+        guard let timestamp = dict[Constants.timestamp] as? Timestamp else { return nil }
+        let photoUrl = dict[Constants.photoURL] as? String
+        let name = dict[Constants.name] as? String
+        
+        let conversation = Conversation(
+            id: documentID,
+            text: text,
+            email: email,
+            fromId: fromId,
+            toId: toId,
+            photoUrl: photoUrl,
+            timeStamp: timestamp,
+            name: name
+        )
+        return conversation
+    }
+    
+    func modifiedConversation(_ change: DocumentChange){
+        let documentID = change.document.documentID
+        if let index = self.conversations.firstIndex(where: { rm in
+            return rm.id == documentID
+        }) {
+            self.conversations.remove(at: index)
+            if let conversation = createConversation(change){
+                self.conversations.insert(conversation, at: index)
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func removeConversation(_ change: DocumentChange){
+        let documentID = change.document.documentID
+        if let index = self.conversations.firstIndex(where: { rm in
+            return rm.id == documentID
+        }) {
+            self.conversations.remove(at: index)
+        }
     }
     
     @IBAction func handleAddFriendBt(_ sender: Any) {
@@ -106,9 +157,9 @@ class ConversationViewController: UIViewController {
         self.navigationController?.pushViewController(newMessageVC, animated: true)
     }
     
-    func showChatViewController(_ user: UserResponse){
+    func showChatViewController(_ receiver: UserResponse){
         guard let currentUser = UserDefaultsManager.shared.getUser() else { return }
-        let chatViewController = ChatViewController(currentUser: currentUser, user: user)
+        let chatViewController = ChatViewController(currentUser: currentUser, receiver: receiver)
         self.navigationController?.pushViewController(chatViewController, animated: true)
     }
 }
@@ -129,11 +180,8 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
     
     func setupTableView(){
         tableView.dataSource = self
-        
         tableView.delegate = self
-        
         tableView.separatorStyle = .none
-        
         let messageTableViewCell = UINib(nibName: "MessageTableViewCell", bundle: nil)
         tableView.register(messageTableViewCell, forCellReuseIdentifier: "MessageTableViewCell")
     }
@@ -165,31 +213,101 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
         tableView: UITableView,
         indexPath: IndexPath
     ) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as! MessageTableViewCell
-        if let urlString = conversation.photoUrl,
-           let photoUrl = URL(string: urlString) {
-            cell.avatarImage.kf.setImage(with: photoUrl)
-        }
-        cell.timeAgoLabel.text = "\(conversation.timeStamp.dateValue())"
-        if let name = conversation.name, !name.isEmpty{
-            cell.userLabel.text = name
-        }else{
-            cell.userLabel.text = conversation.email
-        }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as! MessageTableViewCell
+            
+            if let urlString = conversation.photoUrl,
+               let photoUrl = URL(string: urlString) {
+                cell.avatarImage.kf.setImage(with: photoUrl)
+            }
+            
+            if !conversation.text.isEmpty{
+                let createdAt = conversation.timeStamp.dateValue()
+                let now = Date()
+                let createdAtDisplay = createdAt.timeSinceDate(fromDate: now)
+                cell.timeAgoLabel.text = createdAtDisplay
+            }else{
+                cell.timeAgoLabel.text = nil
+            }
         
-        cell.contentLabel.text = conversation.text
-        return cell
-    }
+            if let name = conversation.name, !name.isEmpty{
+                cell.userLabel.text = name
+            }else{
+                cell.userLabel.text = conversation.email
+            }
+            
+            cell.contentLabel.text = conversation.text
+            return cell
+        }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let text = searchBar.text, !text.isEmpty{
+            let conversation = self.filters[indexPath.row]
+            let email = conversation.email
+            FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
+                DispatchQueue.main.async {
+                    if let user = user{
+                        self?.showChatViewController(user)
+                    }
+                }
+            })
+        }else{
+            let conversation = self.conversations[indexPath.row]
+            let email = conversation.email
+            FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
+                DispatchQueue.main.async {
+                    if let user = user{
+                        self?.showChatViewController(user)
+                    }
+                }
+            })
+        }
+    }
+    
+    private func deleteConversation(at indexPath: IndexPath){
+        self.dispatchGroup.enter()
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         let conversation = self.conversations[indexPath.row]
-        let email = conversation.email.safeEmail()
-       
+        let email = conversation.email
         FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
             DispatchQueue.main.async {
                 if let user = user{
-                    self?.showChatViewController(user)
+                    FirebaseManager
+                        .shared
+                        .fireStore
+                        .collection(Constants.conversations)
+                        .document(uid)
+                        .collection(Constants.lastmessage)
+                        .document(user.uid)
+                        .delete { error in
+                            self?.dispatchGroup.leave()
+                        }
                 }
+            }
+        })
+    }
+    
+    private func deleteMessage(at indexPath: IndexPath){
+        self.dispatchGroup.enter()
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let conversation = self.conversations[indexPath.row]
+        let email = conversation.email
+        FirebaseManager.shared.getUserProfile(email, completion: { user in
+            if let user = user{
+                FirebaseManager.shared.fireStore
+                    .collection(Constants.messages)
+                    .document(uid)
+                    .collection(user.uid)
+                    .getDocuments() { (querySnapshot, err) in
+                        if let err = err {
+                            print("Error getting documents: \(err)")
+                        } else {
+                            if let documents = querySnapshot?.documents{
+                                for document in documents {
+                                    document.reference.delete()
+                                }
+                            }
+                        }
+                    }
             }
         })
     }
@@ -198,9 +316,20 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
         
         let deleteAction = UIContextualAction(style: .destructive, title: nil) {
             (action, sourceView, completionHandler) in
-            //test action
-            
-            completionHandler(true)
+            let alertVC = UIAlertController(
+                title: nil,
+                message: "Xoá cuộc hội thoại?",
+                preferredStyle: .alert
+            )
+            let delete = UIAlertAction(title: "Xoá", style: .destructive){action in
+                self.deleteConversation(at: indexPath)
+                self.deleteMessage(at: indexPath)
+                completionHandler(true)
+            }
+            let cancel = UIAlertAction(title: "Huỷ", style: .cancel)
+            alertVC.addAction(delete)
+            alertVC.addAction(cancel)
+            self.present(alertVC, animated: true)
         }
         deleteAction.image = UIImage(systemName: "trash")
         

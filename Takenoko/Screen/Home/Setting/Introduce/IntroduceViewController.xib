@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Bold.ttf">
+            <string>Poppins-Bold</string>
+        </array>
+        <array key="Poppins-Regular.ttf">
+            <string>Poppins-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroduceViewController" customModule="Takenoko" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQ8-U6-TNT">
+                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CS4-k2-dQ6">
+                            <rect key="frame" x="24" y="24" width="24" height="24"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.backward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="P1g-pA-R1L">
+                                    <rect key="frame" x="0.0" y="3" width="24" height="18.333333333333332"/>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24" id="evQ-b9-MJy"/>
+                                        <constraint firstAttribute="width" constant="24" id="y7U-Jt-bR3"/>
+                                    </constraints>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLV-pR-Tdk">
+                                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <connections>
+                                        <action selector="handleBack:" destination="-1" eventType="touchUpInside" id="eOK-b3-Elt"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="KLV-pR-Tdk" firstAttribute="leading" secondItem="CS4-k2-dQ6" secondAttribute="leading" id="CrQ-tS-9ve"/>
+                                <constraint firstAttribute="width" constant="24" id="XQC-pp-mau"/>
+                                <constraint firstItem="P1g-pA-R1L" firstAttribute="top" secondItem="CS4-k2-dQ6" secondAttribute="top" id="dP4-yV-pWr"/>
+                                <constraint firstAttribute="height" constant="24" id="dbQ-yc-3zj"/>
+                                <constraint firstAttribute="trailing" secondItem="P1g-pA-R1L" secondAttribute="trailing" id="etv-sk-n3B"/>
+                                <constraint firstAttribute="trailing" secondItem="KLV-pR-Tdk" secondAttribute="trailing" id="f9F-z6-0cP"/>
+                                <constraint firstItem="P1g-pA-R1L" firstAttribute="leading" secondItem="CS4-k2-dQ6" secondAttribute="leading" id="iS1-Oz-j9H"/>
+                                <constraint firstAttribute="bottom" secondItem="KLV-pR-Tdk" secondAttribute="bottom" id="iXX-tN-HMW"/>
+                                <constraint firstAttribute="bottom" secondItem="P1g-pA-R1L" secondAttribute="bottom" id="tyV-3m-L6R"/>
+                                <constraint firstItem="KLV-pR-Tdk" firstAttribute="top" secondItem="CS4-k2-dQ6" secondAttribute="top" id="vK1-cc-Lad"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Giới thiệu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BIL-UZ-ayN">
+                            <rect key="frame" x="121.66666666666669" y="25" width="150" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="Zhi-3T-R08"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="25"/>
+                            <color key="textColor" red="0.14117647059999999" green="0.47058823529999999" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3N-SO-LgM">
+                            <rect key="frame" x="24" y="80" width="345" height="679"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <string key="text">Takenoko là ứng dụng nhắn tin tập trung vào bảo mật, đơn giản và miễn phí. Bạn có thể sử dụng Takenoko trên tất cả các thiết bị của mình cùng một lúc - tin nhắn của bạn được đồng bộ hóa liền mạch trên mọi số lượng điện thoại hoặc máy tính bảng của bạn. Với Takenoko, bạn có thể gửi tin nhắn, ảnh, video và tệp thuộc bất kỳ loại nào (doc, zip, mp3, v.v.). 
+Và điều đặc biệt nhất là đối với học sinh, sinh viên, giáo viên và giảng viên hoặc bất kỳ ai thường xuyên trao đổi những bài toán online cũng có thể gửi những tin nhắn công thức, ký tự đặc biệt trong chương trình học. Đây là một sự khác biệt vượt trội so với các ứng dụng gửi tin nhắn thông thường.
+Bạn có thể tìm mọi người theo tên người dùng của họ hoặc là email hay số điện thoại. Do đó, Takenoko giống như SMS và email kết hợp - và có thể đáp ứng mọi nhu cầu nhắn tin cá nhân hoặc nhóm của bạn.
+</string>
+                            <color key="textColor" systemColor="labelColor"/>
+                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="18"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="A3N-SO-LgM" secondAttribute="bottom" id="0ha-zJ-yIA"/>
+                        <constraint firstItem="A3N-SO-LgM" firstAttribute="top" secondItem="BIL-UZ-ayN" secondAttribute="bottom" constant="20" id="2YX-2T-nad"/>
+                        <constraint firstItem="BIL-UZ-ayN" firstAttribute="centerX" secondItem="hQ8-U6-TNT" secondAttribute="centerX" id="AMV-eR-kem"/>
+                        <constraint firstItem="CS4-k2-dQ6" firstAttribute="top" secondItem="hQ8-U6-TNT" secondAttribute="top" constant="24" id="O1l-lp-kcb"/>
+                        <constraint firstItem="CS4-k2-dQ6" firstAttribute="leading" secondItem="hQ8-U6-TNT" secondAttribute="leading" constant="24" id="OmU-yf-g3r"/>
+                        <constraint firstAttribute="trailing" secondItem="A3N-SO-LgM" secondAttribute="trailing" constant="24" id="YMO-9a-brQ"/>
+                        <constraint firstItem="BIL-UZ-ayN" firstAttribute="top" secondItem="hQ8-U6-TNT" secondAttribute="top" constant="25" id="c8y-ws-y81"/>
+                        <constraint firstItem="A3N-SO-LgM" firstAttribute="leading" secondItem="hQ8-U6-TNT" secondAttribute="leading" constant="24" id="q5e-bI-ktp"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hQ8-U6-TNT" secondAttribute="trailing" id="2ee-sy-8BM"/>
+                <constraint firstItem="hQ8-U6-TNT" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="7gw-Yx-PBw"/>
+                <constraint firstItem="hQ8-U6-TNT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="AsP-X9-aGp"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="hQ8-U6-TNT" secondAttribute="bottom" id="eXs-GM-0rZ"/>
+            </constraints>
+            <point key="canvasLocation" x="26" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="95"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

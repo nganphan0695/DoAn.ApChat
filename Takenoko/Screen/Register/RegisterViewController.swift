@@ -32,6 +32,7 @@ class RegisterViewController: UIViewController {
         setupEmailView()
         setupPasswordView()
         registerBt.isEnabled = false
+        cursorColor()
     }
     
     func setupEmailView(){
@@ -113,7 +114,7 @@ class RegisterViewController: UIViewController {
     
     @IBAction func handleRegisterBt(_ sender: Any) {
         if validate(){
-            callAPILogin()
+            callAPIRegister()
         }
     }
     
@@ -168,7 +169,7 @@ extension RegisterViewController{
         }
     }
 
-    func callAPILogin(){
+    func callAPIRegister(){
         let email: String = emailText.text ?? ""
         let password: String = passwordText.text ?? ""
         
@@ -188,7 +189,7 @@ extension RegisterViewController{
                 default:
                     self.showAlert(title: "Lỗi", message: error?.localizedDescription ?? "")
                 }
-                showLoading(isShow: false)
+                self.showLoading(isShow: false)
                 return
             }
             
@@ -207,7 +208,7 @@ extension RegisterViewController{
                 )
                 FirebaseManager.shared.insertUser(user)
             }
-            showLoading(isShow: false)
+            self.showLoading(isShow: false)
             
             let loginViewController = LoginViewController(nibName: "LoginViewController", bundle: nil)
             loginViewController.email = user?.email
