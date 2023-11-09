@@ -9,6 +9,9 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class ConversationViewController: UIViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addFriendView: UIView!
@@ -20,10 +23,6 @@ class ConversationViewController: UIViewController {
     var filters = [Conversation]()
     
     private var dispatchGroup = DispatchGroup()
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-          return .lightContent
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,6 +115,15 @@ class ConversationViewController: UIViewController {
         let photoUrl = dict[Constants.photoURL] as? String
         let name = dict[Constants.name] as? String
         
+        var islock: Bool = false
+        var password: String = ""
+        
+        if let isLockValue = dict[Constants.isLock] as? Bool,
+           let passwordValue = dict[Constants.password] as? String{
+            islock = isLockValue
+            password = passwordValue
+        }
+        
         let conversation = Conversation(
             id: documentID,
             text: text,
@@ -124,7 +132,9 @@ class ConversationViewController: UIViewController {
             toId: toId,
             photoUrl: photoUrl,
             timeStamp: timestamp,
-            name: name
+            name: name,
+            isLock: islock,
+            password: password
         )
         return conversation
     }
@@ -240,8 +250,14 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
         }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        
         if let text = searchBar.text, !text.isEmpty{
             let conversation = self.filters[indexPath.row]
+            if conversation.isLock{
+                self.checkPassword(conversation)
+                return
+            }
             let email = conversation.email
             FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
                 DispatchQueue.main.async {
@@ -252,6 +268,10 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
             })
         }else{
             let conversation = self.conversations[indexPath.row]
+            if conversation.isLock{
+                self.checkPassword(conversation)
+                return
+            }
             let email = conversation.email
             FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
                 DispatchQueue.main.async {
@@ -314,6 +334,9 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        let conversation = self.conversations[indexPath.row]
+        let isLock = conversation.isLock
+       
         let deleteAction = UIContextualAction(style: .destructive, title: nil) {
             (action, sourceView, completionHandler) in
             let alertVC = UIAlertController(
@@ -329,6 +352,7 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
             let cancel = UIAlertAction(title: "Huỷ", style: .cancel)
             alertVC.addAction(delete)
             alertVC.addAction(cancel)
+            alertVC.view.tintColor = Colors.primaryColor
             self.present(alertVC, animated: true)
         }
         deleteAction.image = UIImage(systemName: "trash")
@@ -338,22 +362,176 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
             self.showAlert(title: "Xin lỗi", message: "Tính năng này sẽ được phát triển sau")
             completionHandler(true)
         }
+        
         notificationAction.image = UIImage(systemName: "bell")
         notificationAction.backgroundColor = UIColor(red: 255/255.0, green: 128.0/255.0, blue: 0.0, alpha: 1.0)
   
-        let lockAction = UIContextualAction(style: .normal, title: "Share") {
+        let lockAction = UIContextualAction(style: .normal, title: nil) {
             (action, sourceView, completionHandler) in
-            //
+            if isLock{
+                self.unlockConversation(indexPath)
+            }else{
+                self.lockConversation(indexPath)
+            }
             completionHandler(true)
         }
-        lockAction.image = UIImage(systemName: "lock")
+        
+        var image = UIImage(systemName: "lock")
+        if isLock{
+            image = UIImage(systemName: "lock.open")
+        }
+        
+        lockAction.image = image
         lockAction.backgroundColor = UIColor(red: 28.0/255.0, green: 165.0/255.0, blue: 253.0/255.0, alpha: 1.0)
-
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, lockAction, notificationAction])
-
         swipeConfiguration.performsFirstActionWithFullSwipe = false
         
         return swipeConfiguration
     }
     
+    func lockConversation(_ indexPath: IndexPath){
+        let conversation = self.conversations[indexPath.row]
+        let alertVC = UIAlertController(
+            title: nil,
+            message: "Khoá cuộc hội thoại?",
+            preferredStyle: .alert
+        )
+        
+        let lock = UIAlertAction(title: "Khoá", style: .destructive){ action in
+            if let password = alertVC.textFields?[0].text{
+                conversation.isLock = true
+                conversation.password = password
+                self.updateConversation(conversation)
+            }
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+        }
+        lock.isEnabled = false
+        
+        let cancel = UIAlertAction(title: "Huỷ", style: .cancel)
+        
+        alertVC.addTextField { textField in
+            textField.placeholder = "Nhập mật khẩu tối thiểu 6 ký tự"
+            textField.isSecureTextEntry = true
+            textField.addTarget(alertVC, action: #selector(alertVC.textDidChangePasswordAlert), for: .editingChanged)
+        }
+        alertVC.addAction(lock)
+        alertVC.addAction(cancel)
+        alertVC.view.tintColor = Colors.primaryColor
+        self.present(alertVC, animated: true)
+    }
+    
+    
+    //MARK: - Unlock
+    func unlockConversation(_ indexPath: IndexPath){
+        let conversation = self.conversations[indexPath.row]
+        let alertVC = UIAlertController(
+            title: nil,
+            message: "Mở khoá cuộc hội thoại?",
+            preferredStyle: .alert
+        )
+        
+        let lock = UIAlertAction(title: "Mở khoá", style: .destructive){ alert in
+            if let password = alertVC.textFields?[0].text{
+                if conversation.password != password{
+                    self.showAlert(title: "Lỗi", message: "Mật khẩu không khớp!")
+                    return
+                }
+                conversation.isLock = false
+                conversation.password = ""
+                self.updateConversation(conversation)
+            }
+        }
+        lock.isEnabled = false
+        
+        let cancel = UIAlertAction(title: "Huỷ", style: .cancel)
+        
+        alertVC.addTextField { textField in
+            textField.placeholder = "Nhập mật khẩu tối thiểu 6 ký tự"
+            textField.isSecureTextEntry = true
+            textField.addTarget(alertVC, action: #selector(alertVC.textDidChangePasswordAlert), for: .editingChanged)
+        }
+        
+        alertVC.addAction(lock)
+        alertVC.addAction(cancel)
+        alertVC.view.tintColor = Colors.primaryColor
+        self.present(alertVC, animated: true)
+    }
+    
+    func updateConversation(_ conversation: Conversation){
+        let email = conversation.email
+        guard let curentUserId = Auth.auth().currentUser?.uid else { return }
+        FirebaseManager.shared.getUserProfile(email, completion: { user in
+            if let user = user{
+                FirebaseManager.shared.updateRecentMessage(
+                    isLock: conversation.isLock,
+                    password: conversation.password,
+                    currentUserId: curentUserId,
+                    recipientId: user.uid
+                ) { status in
+                    var title: String = conversation.isLock ? "Khóa cuộc hội thoại" :  "Mở khoá cuộc hội thoại"
+                    if status{
+                        self.showAlert(title: title, message: "Thành công!")
+                    }else{
+                        self.showAlert(title: title, message: "Thất bại!")
+                    }
+                }
+            }
+        })
+    }
+    
+    func checkPassword(_ conversation: Conversation){
+        let alertVC = UIAlertController(
+            title: nil,
+            message: "Nhập mật khẩu",
+            preferredStyle: .alert
+        )
+        
+        let lock = UIAlertAction(title: "Xác minh", style: .default){ alert in
+            if let password = alertVC.textFields?[0].text{
+                if conversation.password != password{
+                    self.showAlert(title: "Lỗi", message: "Mật khẩu không khớp!")
+                    return
+                }
+                
+                let email = conversation.email
+                FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
+                    DispatchQueue.main.async {
+                        if let user = user{
+                            self?.showChatViewController(user)
+                        }
+                    }
+                })
+            }
+        }
+        
+        lock.isEnabled = false
+        
+        let cancel = UIAlertAction(title: "Huỷ", style: .cancel)
+        
+        alertVC.addTextField { textField in
+            textField.placeholder = "Nhập mật khẩu tối thiểu 6 ký tự"
+            textField.isSecureTextEntry = true
+            textField.addTarget(alertVC, action: #selector(alertVC.textDidChangePasswordAlert), for: .editingChanged)
+        }
+        
+        alertVC.addAction(lock)
+        alertVC.addAction(cancel)
+        alertVC.view.tintColor = Colors.primaryColor
+        self.present(alertVC, animated: true)
+    }
+}
+
+
+extension UIAlertController {
+
+    func isValidPassword(_ password: String) -> Bool {
+        return password.count >= 6 && password.rangeOfCharacter(from: .whitespacesAndNewlines) == nil
+    }
+
+    @objc func textDidChangePasswordAlert() {
+        if let password = textFields?[0].text,
+            let action = actions.first {
+            action.isEnabled = isValidPassword(password)
+        }
+    }
 }

@@ -10,15 +10,15 @@ import FirebaseAuth
 import Kingfisher
 
 class ProfileViewController: UIViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var avatarView: UIView!
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-          return .lightContent
-    }
 
     var imagePickUp = UIImagePickerController()
     var imageHasChange: Bool = false
@@ -148,6 +148,7 @@ class ProfileViewController: UIViewController {
         
         let cancel = UIAlertAction(title: "Huỷ", style: .cancel)
         alertVC.addAction(cancel)
+        alertVC.view.tintColor = Colors.primaryColor
         present(alertVC, animated: true)
     }
 }

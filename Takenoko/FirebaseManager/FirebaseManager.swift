@@ -29,6 +29,8 @@ struct Constants {
     static let isLogin = "isLogin"
     static let senderName = "senderName"
     static let senderId = "senderId"
+    static let isLock = "isLock"
+    static let password = "password"
 }
 
 class FirebaseManager{
@@ -217,6 +219,34 @@ class FirebaseManager{
         }
     }
     
+    func updateRecentMessage(
+        isLock: Bool,
+        password: String,
+        currentUserId: String,
+        recipientId: String,
+        completion: @escaping(Bool) -> Void
+    ){
+        let data: [String: Any] = [
+            Constants.isLock: isLock,
+            Constants.password: password
+        ]
+        
+        let document = fireStore
+            .collection(Constants.conversations)
+            .document(currentUserId)
+            .collection(Constants.lastmessage)
+            .document(recipientId)
+        
+        document.setData(data, merge: true) { error in
+            if let error = error {
+                print("Failed to save recent message: \(error)")
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
+    
     func saveRecentMessage(
         _ currentUser: UserResponse,
         recipient: UserResponse,
@@ -242,7 +272,7 @@ class FirebaseManager{
             Constants.name: recipient.name
         ]
         
-        document.setData(data) { error in
+        document.setData(data, merge: true) { error in
             if let error = error {
                 print("Failed to save recent message: \(error)")
                 return

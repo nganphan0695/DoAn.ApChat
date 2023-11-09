@@ -9,6 +9,7 @@ import UIKit
 import FirebaseAuth
 
 class ForgotPasswordViewController: UIViewController {
+   
     @IBOutlet weak var googleView: UIView!
     @IBOutlet weak var appleView: UIView!
     @IBOutlet weak var facebookView: UIView!
@@ -104,7 +105,11 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     @IBAction func handleResetPassword(_ sender: Any) {
-        callAPI()
+        if Reachability.isConnectedToNetwork(){
+            callAPI()
+        } else{
+            showAlert(title: "Lỗi mạng", message: "Kiểm tra kết nối internet.")
+        }
     }
     
     func callAPI(){
@@ -132,6 +137,7 @@ class ForgotPasswordViewController: UIViewController {
                 strongSelf.navigationController?.popViewController(animated: true)
             }
             alertVC.addAction(okAction)
+            alertVC.view.tintColor = Colors.primaryColor
             strongSelf.present(alertVC, animated: true)
         }
     }

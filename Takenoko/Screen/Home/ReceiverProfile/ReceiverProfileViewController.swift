@@ -10,6 +10,9 @@ import FirebaseAuth
 import Kingfisher
 
 class ReceiverProfileViewController: UIViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var avatarImage: UIImageView!
@@ -18,11 +21,7 @@ class ReceiverProfileViewController: UIViewController {
     private var items = [Profile]()
     
     var receiverEmail: String!
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()

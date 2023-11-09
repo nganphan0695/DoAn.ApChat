@@ -109,7 +109,11 @@ class LoginViewController: UIViewController {
     
     @IBAction func handleLoginBt(_ sender: Any) {
         if validate(){
-            callAPILogin()
+            if Reachability.isConnectedToNetwork(){
+                callAPILogin()
+            } else{
+                showAlert(title: "Lỗi mạng", message: "Kiểm tra kết nối internet.")
+            }
         }
     }
     
@@ -185,11 +189,8 @@ extension LoginViewController{
                 return
             }
             guard error == nil else{
-                self?.showLoading(isShow: false)
-                let alertVC = UIAlertController(title: "Lỗi", message: error?.localizedDescription, preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .cancel)
-                alertVC.addAction(okAction)
-                strongSelf.present(alertVC, animated: true)
+                strongSelf.showLoading(isShow: false)
+                strongSelf.showAlert(title: "Lỗi", message: error?.localizedDescription)
                 return
             }
             UserDefaultsManager.shared.setIsLogin(true)

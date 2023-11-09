@@ -16,6 +16,9 @@ import Kingfisher
 import SwiftHEXColors
 
 class ChatViewController: MessagesViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     private var isSendingPhoto = false {
         didSet {
@@ -88,10 +91,6 @@ class ChatViewController: MessagesViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -400,6 +399,7 @@ extension ChatViewController: MessageCellDelegate {
         let cancel = UIAlertAction(title: "Huỷ", style: .cancel)
         alertVC.addAction(delete)
         alertVC.addAction(cancel)
+        alertVC.view.tintColor = Colors.primaryColor
         self.present(alertVC, animated: true)
     }
     
@@ -442,6 +442,7 @@ extension ChatViewController: MessageCellDelegate {
         let cancel = UIAlertAction(title: "Huỷ", style: .cancel)
         alertVC.addAction(delete)
         alertVC.addAction(cancel)
+        alertVC.view.tintColor = Colors.primaryColor
         self.present(alertVC, animated: true)
     }
     

@@ -17,7 +17,7 @@
 		0466AAB42AF62DF3005E74BD /* TPKeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466AAB32AF62DF3005E74BD /* TPKeyboardAvoiding.swift */; };
 		0466AAB82AF6387B005E74BD /* ReceiverProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466AAB62AF6387B005E74BD /* ReceiverProfileViewController.swift */; };
 		0466AAB92AF6387B005E74BD /* ReceiverProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0466AAB72AF6387B005E74BD /* ReceiverProfileViewController.xib */; };
-		0466AABC2AF654BD005E74BD /* NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466AABB2AF654BD005E74BD /* NetworkViewController.swift */; };
+		0466AABC2AF654BD005E74BD /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466AABB2AF654BD005E74BD /* Reachability.swift */; };
 		047DDBD12ADA37DA00AE0003 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047DDBD02ADA37D900AE0003 /* Home.storyboard */; };
 		047DDBD52ADA3D1300AE0003 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DDBD42ADA3D1300AE0003 /* ConversationViewController.swift */; };
 		047DDBDA2ADA48EE00AE0003 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DDBD82ADA48EE00AE0003 /* MessageTableViewCell.swift */; };
@@ -83,7 +83,7 @@
 		0466AAB32AF62DF3005E74BD /* TPKeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPKeyboardAvoiding.swift; sourceTree = "<group>"; };
 		0466AAB62AF6387B005E74BD /* ReceiverProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverProfileViewController.swift; sourceTree = "<group>"; };
 		0466AAB72AF6387B005E74BD /* ReceiverProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiverProfileViewController.xib; sourceTree = "<group>"; };
-		0466AABB2AF654BD005E74BD /* NetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewController.swift; sourceTree = "<group>"; };
+		0466AABB2AF654BD005E74BD /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		047DDBD02ADA37D900AE0003 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		047DDBD42ADA3D1300AE0003 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		047DDBD82ADA48EE00AE0003 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 		0466AABA2AF6549B005E74BD /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				0466AABB2AF654BD005E74BD /* NetworkViewController.swift */,
+				0466AABB2AF654BD005E74BD /* Reachability.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -599,7 +599,7 @@
 				04B88CEF2AE367D3000D4A21 /* NewMessageViewController.swift in Sources */,
 				0466AAB42AF62DF3005E74BD /* TPKeyboardAvoiding.swift in Sources */,
 				0492B2F82ADD03B8001D0CE0 /* SettingTableViewCell.swift in Sources */,
-				0466AABC2AF654BD005E74BD /* NetworkViewController.swift in Sources */,
+				0466AABC2AF654BD005E74BD /* Reachability.swift in Sources */,
 				0466AAB82AF6387B005E74BD /* ReceiverProfileViewController.swift in Sources */,
 				04B88CEA2ADFBA6D000D4A21 /* Setting.swift in Sources */,
 				04B88CEC2ADFC04F000D4A21 /* FirebaseManager.swift in Sources */,
