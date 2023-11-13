@@ -129,7 +129,11 @@ class ChatViewController: MessagesViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        listenToMessages()
+        if Network.shared.isConnected == false{
+            showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+        }else{
+            listenToMessages()
+        }
         let name = self.receiver.name
         let title = name.isEmpty ? self.receiver.email : name
         setNavigationItem()
@@ -214,6 +218,10 @@ class ChatViewController: MessagesViewController {
     
     // MARK: - Helpers
     private func save(_ message: Message) {
+        if Network.shared.isConnected == false{
+            showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+            return
+        }
         FirebaseManager.shared.sendMessage(
             sender: currentUser,
             recipient: self.receiver,
@@ -240,6 +248,10 @@ class ChatViewController: MessagesViewController {
     }
     
     private func deleteMessage(_ change: DocumentChange){
+        if Network.shared.isConnected == false{
+            showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+            return
+        }
         guard let message = Message(document: change.document) else { return }
         if let index = self.messages.firstIndex(where: { element in
             return element.id == message.id
@@ -384,6 +396,10 @@ extension ChatViewController: MessageCellDelegate {
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
         print("Message tapped")
+        if Network.shared.isConnected == false{
+            showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+            return
+        }
         self.messageInputBar.inputTextView.resignFirstResponder()
         let alertVC = UIAlertController(
             title: nil,
@@ -403,6 +419,8 @@ extension ChatViewController: MessageCellDelegate {
         self.present(alertVC, animated: true)
     }
     
+    ///Xoa tin nhan tren sever
+    ///
     private func deleteMessage(_ message: Message){
         let userId = self.currentUser.uid
         let receiverId = self.receiver.uid
@@ -427,6 +445,10 @@ extension ChatViewController: MessageCellDelegate {
     
     func didTapImage(in cell: MessageCollectionViewCell) {
         print("Image tapped")
+        if Network.shared.isConnected == false{
+            showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+            return
+        }
         self.messageInputBar.inputTextView.resignFirstResponder()
         let alertVC = UIAlertController(
             title: nil,

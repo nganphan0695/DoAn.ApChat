@@ -24,10 +24,14 @@ class NewMessageViewController: UIViewController {
         setupTableView()
         searchBar.delegate = self
         
-        FirebaseManager.shared.getAllUser {[weak self] users in
-            self?.users = users
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
+        if Network.shared.isConnected == false{
+            showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+        }else{
+            FirebaseManager.shared.getAllUser {[weak self] users in
+                self?.users = users
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
             }
         }
     }
@@ -47,7 +51,6 @@ extension NewMessageViewController: UITableViewDataSource, UITableViewDelegate{
     
     func setupTableView(){
         tableView.dataSource = self
-        
         tableView.delegate = self
         
         tableView.separatorStyle = .none

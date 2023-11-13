@@ -114,10 +114,11 @@ class RegisterViewController: UIViewController {
     
     @IBAction func handleRegisterBt(_ sender: Any) {
         if validate(){
-            if Reachability.isConnectedToNetwork(){
+            if Network.shared.isConnected == false{
+                showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+                return
+            }else{
                 callAPIRegister()
-            } else{
-                showAlert(title: "Lỗi mạng", message: "Kiểm tra kết nối internet.")
             }
         }
     }

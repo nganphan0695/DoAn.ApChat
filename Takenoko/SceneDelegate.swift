@@ -16,18 +16,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         if let isLogin = UserDefaultsManager.shared.getLoginStatus(), isLogin, Auth.auth().currentUser != nil{
-                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                    let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeUITabBarViewController")
-                    let navigation = UINavigationController(rootViewController: homeVC)
-                    window?.rootViewController = navigation
-                    window?.makeKeyAndVisible()
-            }else{
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let navigationVC = storyboard.instantiateViewController(withIdentifier: "NavigationOnBoard")
-                window?.rootViewController = navigationVC
-                window?.makeKeyAndVisible()
-
-            }
+            let storyboard = UIStoryboard(name: "Home", bundle: nil)
+            let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeUITabBarViewController")
+            let navigation = UINavigationController(rootViewController: homeVC)
+            window?.rootViewController = navigation
+            window?.makeKeyAndVisible()
+        }else{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let navigationVC = storyboard.instantiateViewController(withIdentifier: "NavigationOnBoard")
+            window?.rootViewController = navigationVC
+            window?.makeKeyAndVisible()
+            
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

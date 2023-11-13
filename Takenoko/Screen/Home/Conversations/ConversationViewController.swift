@@ -28,8 +28,21 @@ class ConversationViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
         setupView()
-        getAllConversation()
+        if Network.shared.isConnected == false{
+            showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+        }else{
+            getAllConversation()
+            setAvatar()
+        }
         setupTableView()
+    }
+    
+    func setAvatar(){
+        if let user = UserDefaultsManager.shared.getUser(),
+           let photoUrl = user.photoUrl,
+           let url = URL(string: photoUrl){
+            self.avatarImage.kf.setImage(with: url)
+        }
     }
     
     func setupView(){
@@ -45,21 +58,13 @@ class ConversationViewController: UIViewController {
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.clear
         plusView.layer.cornerRadius = plusView.frame.height / 2
         plusView.clipsToBounds = true
-        
-        guard let email = Auth.auth().currentUser?.email else {return}
-        showLoading(isShow: true)
-        FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
-            if let photoUrl = user?.photoUrl, let url = URL(string: photoUrl){
-                self?.avatarImage.kf.setImage(with: url)
-            }
-            self?.showLoading(isShow: false)
-        })
     }
     
     func getAllConversation(){
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
+        
         FirebaseManager
             .shared
             .fireStore
@@ -251,7 +256,10 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        
+        if Network.shared.isConnected == false{
+            showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+            return
+        }
         if let text = searchBar.text, !text.isEmpty{
             let conversation = self.filters[indexPath.row]
             if conversation.isLock{
@@ -339,6 +347,10 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
        
         let deleteAction = UIContextualAction(style: .destructive, title: nil) {
             (action, sourceView, completionHandler) in
+            if Network.shared.isConnected == false{
+                self.showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+                return
+            }
             let alertVC = UIAlertController(
                 title: nil,
                 message: "Xoá cuộc hội thoại?",
@@ -458,6 +470,10 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func updateConversation(_ conversation: Conversation){
+        if Network.shared.isConnected == false{
+            showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+            return
+        }
         let email = conversation.email
         guard let curentUserId = Auth.auth().currentUser?.uid else { return }
         FirebaseManager.shared.getUserProfile(email, completion: { user in
@@ -468,7 +484,7 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
                     currentUserId: curentUserId,
                     recipientId: user.uid
                 ) { status in
-                    var title: String = conversation.isLock ? "Khóa cuộc hội thoại" :  "Mở khoá cuộc hội thoại"
+                    let title: String = conversation.isLock ? "Khóa cuộc hội thoại" :  "Mở khoá cuộc hội thoại"
                     if status{
                         self.showAlert(title: title, message: "Thành công!")
                     }else{
@@ -480,6 +496,10 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func checkPassword(_ conversation: Conversation){
+        if Network.shared.isConnected == false{
+            self.showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+            return
+        }
         let alertVC = UIAlertController(
             title: nil,
             message: "Nhập mật khẩu",
@@ -492,7 +512,6 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
                     self.showAlert(title: "Lỗi", message: "Mật khẩu không khớp!")
                     return
                 }
-                
                 let email = conversation.email
                 FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
                     DispatchQueue.main.async {

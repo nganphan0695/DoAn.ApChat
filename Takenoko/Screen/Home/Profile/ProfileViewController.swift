@@ -31,13 +31,18 @@ class ProfileViewController: UIViewController {
         setupTableView()
         cursorColor()
         
-        guard let email = Auth.auth().currentUser?.email else {return}
-        showLoading(isShow: true)
-        FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
-            UserDefaultsManager.shared.save(user)
-                    self?.updateUser(user)
-                    self?.showLoading(isShow: false)
-        })
+        if Network.shared.isConnected == false{
+            showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+            return
+        }else{
+            guard let email = Auth.auth().currentUser?.email else {return}
+            showLoading(isShow: true)
+            FirebaseManager.shared.getUserProfile(email, completion: {[weak self] user in
+                UserDefaultsManager.shared.save(user)
+                self?.updateUser(user)
+                self?.showLoading(isShow: false)
+            })
+        }
     }
     
     func updateUser(_ user: UserResponse?){
@@ -70,9 +75,12 @@ class ProfileViewController: UIViewController {
     
     @IBAction func handleSaveBt(_ sender: Any) {
         self.view.endEditing(true)
-        
         if validate(){
-            callAPIUpdateAvatarAndProfile()
+            if Network.shared.isConnected == false{
+                showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+            }else{
+                callAPIUpdateAvatarAndProfile()
+            }
         }
     }
     
@@ -266,6 +274,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
         if profile.item == .gender{
             cell.setupPicker()
             cell.lastSelected = profile.value
+        }else if profile.item == .birthday{
+            cell.setupDatePicker()
+            cell.lastSelectedDate = profile.value
         }
         return cell
     }

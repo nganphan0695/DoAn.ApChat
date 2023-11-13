@@ -105,10 +105,13 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     @IBAction func handleResetPassword(_ sender: Any) {
-        if Reachability.isConnectedToNetwork(){
-            callAPI()
-        } else{
-            showAlert(title: "Lỗi mạng", message: "Kiểm tra kết nối internet.")
+        if validate(){
+            if Network.shared.isConnected == false{
+                showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+                return
+            }else{
+                callAPI()
+            }
         }
     }
     

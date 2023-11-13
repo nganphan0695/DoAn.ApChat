@@ -34,11 +34,16 @@ class ReceiverProfileViewController: UIViewController {
         avatarView.layer.borderColor = UIColor.white.cgColor
         avatarView.clipsToBounds = true
         
-        showLoading(isShow: true)
-        FirebaseManager.shared.getUserProfile(receiverEmail, completion: {[weak self] user in
-            self?.updateUser(user)
-            self?.showLoading(isShow: false)
-        })
+        if Network.shared.isConnected == false{
+            showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+            return
+        }else{
+            showLoading(isShow: true)
+            FirebaseManager.shared.getUserProfile(receiverEmail, completion: {[weak self] user in
+                self?.updateUser(user)
+                self?.showLoading(isShow: false)
+            })
+        }
     }
     
     func updateUser(_ user: UserResponse?){

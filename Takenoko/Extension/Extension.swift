@@ -42,11 +42,5 @@ extension UIViewController{
     }
 }
 
-extension UINavigationController {
-    override open var childForStatusBarStyle: UIViewController? {
-        return topViewController
-    }
-}
-
 
 

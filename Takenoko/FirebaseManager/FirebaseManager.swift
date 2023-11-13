@@ -76,6 +76,7 @@ class FirebaseManager{
     }
     
     func getUserProfile(_ email: String, completion: @escaping(UserResponse?) -> Void){
+        
         fireStore.collection(Constants.users).document(email).getDocument { document, error in
             if let document = document, document.exists, let data = document.data() {
                 let user = UserResponse(dict: data)
@@ -142,7 +143,6 @@ class FirebaseManager{
     }
     
     func sendImage(_ data: Data?, completionHandler: @escaping(Bool, String?) -> Void){
-        
         let imageName: String = String("\(Date().timeIntervalSince1970).png")
         
         guard let data = data else {
@@ -172,6 +172,7 @@ class FirebaseManager{
         message: Message,
         completion: @escaping() -> Void
     ) {
+        
         let fromId = sender.uid
         let toId = recipient.uid
         
@@ -252,7 +253,6 @@ class FirebaseManager{
         recipient: UserResponse,
         text: String
     ) {
-        
         let currentUserUid = currentUser.uid
         let toId = recipient.uid
         

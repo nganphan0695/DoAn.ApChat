@@ -91,7 +91,11 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
             case .introduce:
                 handleIntroduce()
             case .logOut:
-                handleLogout()
+                if Network.shared.isConnected == false{
+                    showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+                }else{
+                    handleLogout()
+                }
             default:
                 return showAlert(title: "Xin lỗi", message: "Tính năng này sẽ được phát triển sau")
             }

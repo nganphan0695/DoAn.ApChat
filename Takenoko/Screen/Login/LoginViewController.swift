@@ -109,10 +109,10 @@ class LoginViewController: UIViewController {
     
     @IBAction func handleLoginBt(_ sender: Any) {
         if validate(){
-            if Reachability.isConnectedToNetwork(){
+            if Network.shared.isConnected == false{
+                showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
+            }else{
                 callAPILogin()
-            } else{
-                showAlert(title: "Lỗi mạng", message: "Kiểm tra kết nối internet.")
             }
         }
     }
