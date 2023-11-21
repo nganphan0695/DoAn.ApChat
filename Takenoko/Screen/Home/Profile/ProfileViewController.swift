@@ -10,10 +10,6 @@ import FirebaseAuth
 import Kingfisher
 
 class ProfileViewController: UIViewController {
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var avatarImage: UIImageView!
@@ -137,10 +133,16 @@ class ProfileViewController: UIViewController {
     }
     
     private func showActionSheet(){
-        let alertVC = UIAlertController(title: nil, message: "Chọn ảnh", preferredStyle: .actionSheet)
         
-        let camera = UIAlertAction(title: "Camera", style: .default) { action in
+        var style: UIAlertController.Style = .actionSheet
+        
+        if UIDevice.current.userInterfaceIdiom == .pad{
+            style = .alert
         }
+        
+        let alertVC = UIAlertController(title: nil, message: "Chọn ảnh", preferredStyle: style)
+        
+        let camera = UIAlertAction(title: "Camera", style: .default) { action in }
         alertVC.addAction(camera)
         
         let thuVien = UIAlertAction(title: "Thư viện", style: .default, handler: {

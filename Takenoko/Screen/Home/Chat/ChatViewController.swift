@@ -14,12 +14,12 @@ import FirebaseStorage
 import FirebaseAuth
 import Kingfisher
 import SwiftHEXColors
+import IQKeyboardManagerSwift
 
 class ChatViewController: MessagesViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+          return .lightContent
     }
-
     private var isSendingPhoto = false {
         didSet {
             messageInputBar.leftStackViewItems.forEach { item in
@@ -91,6 +91,7 @@ class ChatViewController: MessagesViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        IQKeyboardManager.shared.enable = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,11 +102,12 @@ class ChatViewController: MessagesViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        IQKeyboardManager.shared.enable = true
     }
     
     func setNavigationItem(){
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        button.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
         button.addTarget(self, action: #selector(didClickBack(_:)), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
         button.sizeToFit()
@@ -140,7 +142,6 @@ class ChatViewController: MessagesViewController {
         navigationItem.title = title
         setUpMessageView()
         addCameraBarButton()
-        print(self.preferredStatusBarStyle.rawValue)
     }
     
     private func listenToMessages() {
@@ -191,8 +192,9 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         scrollsToLastItemOnKeyboardBeginsEditing = true
-        maintainPositionOnKeyboardFrameChanged = true
+        maintainPositionOnInputBarHeightChanged = true
     }
+    
     
     private func addCameraBarButton() {
         let cameraItem = InputBarButtonItem(type: .system)
@@ -228,7 +230,6 @@ class ChatViewController: MessagesViewController {
             message: message
         ) {
             print("Gửi tin nhắn thành công")
-            self.messagesCollectionView.scrollToLastItem(animated: true)
         }
     }
     
@@ -238,8 +239,22 @@ class ChatViewController: MessagesViewController {
         }
         
         messages.append(message)
-        messages.sort()
-        messagesCollectionView.reloadData()
+        messagesCollectionView.performBatchUpdates({
+            messagesCollectionView.insertSections([messages.count - 1])
+            if messages.count >= 2 {
+                messagesCollectionView.reloadSections([messages.count - 2])
+            }
+        }, completion: { [weak self] _ in
+            if self?.isLastSectionVisible() == true {
+                self?.messagesCollectionView.scrollToLastItem(animated: true)
+            }
+        })
+    }
+    
+    private func isLastSectionVisible() -> Bool {
+        guard !messages.isEmpty else { return false }
+        let lastIndexPath = IndexPath(item: 0, section: messages.count - 1)
+        return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
     }
     
     private func addNewMessage(_ change: DocumentChange) {
@@ -355,14 +370,14 @@ extension ChatViewController: MessagesLayoutDelegate {
 // MARK: - MessagesDataSource
 extension ChatViewController: MessagesDataSource {
     
-    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
-        return messages.count
-    }
-    
-    func currentSender() -> SenderType {
+    var currentSender: MessageKit.SenderType {
         let name = currentUser.name
         let displayName = name.isEmpty ? currentUser.email : name
         return Sender(senderId: currentUser.uid, displayName: displayName)
+    }
+    
+    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
+        return messages.count
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
@@ -383,6 +398,7 @@ extension ChatViewController: MessagesDataSource {
 extension ChatViewController: MessageCellDelegate {
     
     func didTapAvatar(in cell: MessageCollectionViewCell) {
+        self.messageInputBar.inputTextView.resignFirstResponder()
         if let indexPath = self.messagesCollectionView.indexPath(for: cell){
             let message = self.messages[indexPath.section]
             if message.sender.senderId == receiver.uid{
@@ -396,11 +412,11 @@ extension ChatViewController: MessageCellDelegate {
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
         print("Message tapped")
+        self.messageInputBar.inputTextView.resignFirstResponder()
         if Network.shared.isConnected == false{
             showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
             return
         }
-        self.messageInputBar.inputTextView.resignFirstResponder()
         let alertVC = UIAlertController(
             title: nil,
             message: "Xoá tin nhắn?",
@@ -418,9 +434,7 @@ extension ChatViewController: MessageCellDelegate {
         alertVC.view.tintColor = Colors.primaryColor
         self.present(alertVC, animated: true)
     }
-    
-    ///Xoa tin nhan tren sever
-    ///
+
     private func deleteMessage(_ message: Message){
         let userId = self.currentUser.uid
         let receiverId = self.receiver.uid
@@ -445,11 +459,11 @@ extension ChatViewController: MessageCellDelegate {
     
     func didTapImage(in cell: MessageCollectionViewCell) {
         print("Image tapped")
+        self.messageInputBar.inputTextView.resignFirstResponder()
         if Network.shared.isConnected == false{
             showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
             return
         }
-        self.messageInputBar.inputTextView.resignFirstResponder()
         let alertVC = UIAlertController(
             title: nil,
             message: "Xoá tin nhắn ảnh?",

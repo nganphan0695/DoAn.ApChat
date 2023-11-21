@@ -6,10 +6,6 @@ import UIKit
 import FirebaseAuth
 
 class SettingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var avatarView: UIView!

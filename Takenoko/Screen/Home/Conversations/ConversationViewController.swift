@@ -9,9 +9,6 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class ConversationViewController: UIViewController {
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addFriendView: UIView!
@@ -228,34 +225,39 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
         tableView: UITableView,
         indexPath: IndexPath
     ) -> UITableViewCell{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as! MessageTableViewCell
-            
-            if let urlString = conversation.photoUrl,
-               let photoUrl = URL(string: urlString) {
-                cell.avatarImage.kf.setImage(with: photoUrl)
-            }
-            
-            if !conversation.text.isEmpty{
-                let createdAt = conversation.timeStamp.dateValue()
-                let now = Date()
-                let createdAtDisplay = createdAt.timeSinceDate(fromDate: now)
-                cell.timeAgoLabel.text = createdAtDisplay
-            }else{
-                cell.timeAgoLabel.text = nil
-            }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as! MessageTableViewCell
         
-            if let name = conversation.name, !name.isEmpty{
-                cell.userLabel.text = name
-            }else{
-                cell.userLabel.text = conversation.email
-            }
-            
-            cell.contentLabel.text = conversation.text
-            return cell
+        if let urlString = conversation.photoUrl,
+           let photoUrl = URL(string: urlString) {
+            cell.avatarImage.kf.setImage(with: photoUrl)
         }
+        
+        if !conversation.text.isEmpty{
+            let createdAt = conversation.timeStamp.dateValue()
+            let now = Date()
+            let createdAtDisplay = createdAt.timeSinceDate(fromDate: now)
+            cell.timeAgoLabel.text = createdAtDisplay
+        }else{
+            cell.timeAgoLabel.text = nil
+        }
+        
+        if let name = conversation.name, !name.isEmpty{
+            cell.userLabel.text = name
+        }else{
+            cell.userLabel.text = conversation.email
+        }
+        
+        cell.contentLabel.text = conversation.text
+        if conversation.isLock{
+            cell.lockImage.isHidden = false
+        }else{
+            cell.lockImage.isHidden = true
+        }
+        return cell
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         if Network.shared.isConnected == false{
             showAlert(title: "Lỗi mạng", message: "Vui lòng kiểm tra kết nối internet!")
             return
@@ -344,7 +346,7 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
         
         let conversation = self.conversations[indexPath.row]
         let isLock = conversation.isLock
-       
+        
         let deleteAction = UIContextualAction(style: .destructive, title: nil) {
             (action, sourceView, completionHandler) in
             if Network.shared.isConnected == false{
@@ -377,7 +379,7 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
         
         notificationAction.image = UIImage(systemName: "bell")
         notificationAction.backgroundColor = UIColor(red: 255/255.0, green: 128.0/255.0, blue: 0.0, alpha: 1.0)
-  
+        
         let lockAction = UIContextualAction(style: .normal, title: nil) {
             (action, sourceView, completionHandler) in
             if isLock{
@@ -542,14 +544,14 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
 
 
 extension UIAlertController {
-
+    
     func isValidPassword(_ password: String) -> Bool {
         return password.count >= 6 && password.rangeOfCharacter(from: .whitespacesAndNewlines) == nil
     }
-
+    
     @objc func textDidChangePasswordAlert() {
         if let password = textFields?[0].text,
-            let action = actions.first {
+           let action = actions.first {
             action.isEnabled = isValidPassword(password)
         }
     }

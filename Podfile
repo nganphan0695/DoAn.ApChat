@@ -12,7 +12,6 @@ target 'Takenoko' do
   pod 'FirebaseDatabase'
   pod 'FirebaseStorage'
   pod 'FirebaseFirestore'
-  pod 'MessageKit'
   pod 'IQKeyboardManagerSwift'
   pod 'SwiftHEXColors'
  

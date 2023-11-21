@@ -96,33 +96,33 @@ extension Date {
         let seconds = components.second ?? 0
         
         if year >= 2 {
-            return "\(year) years ago"
+            return "\(year) năm trước"
         }else if (year >= 1){
-            return "1 year ago"
+            return "1 năm trước"
         }else if (month >= 2) {
-            return "\(month) months ago"
+            return "\(month) tháng trước"
         }else if (month >= 1) {
-            return "1 month ago"
+            return "1 tháng trước"
         }else  if (week >= 2) {
-            return "\(week) weeks ago"
+            return "\(week) tuần trước"
         } else if (week >= 1){
-            return "1 week ago"
+            return "1 tuần trước"
         } else if (day >= 2) {
-            return "\(day) days ago"
+            return "\(day) ngày trước"
         } else if (day >= 1){
-            return "1 day ago"
+            return "1 ngày trước"
         } else if (hours >= 2) {
-            return "\(hours) hours ago"
+            return "\(hours) giờ trước"
         } else if (hours >= 1){
-            return "1 hour ago"
+            return "1 giờ trước"
         } else if (minutes >= 2) {
-            return "\(minutes) minutes ago"
+            return "\(minutes) phút trước"
         } else if (minutes >= 1){
-            return "1 minute ago"
+            return "1 phút trước"
         } else if (seconds >= 3) {
-            return "\(seconds) seconds ago"
+            return "\(seconds) giây trước"
         } else {
-            return "Just now"
+            return "Vừa xong"
         }
         
     }

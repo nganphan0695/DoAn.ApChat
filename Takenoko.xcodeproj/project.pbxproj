@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0409E0192B06683100B46993 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0409E0182B06683100B46993 /* MessageKit */; };
 		041C3DDE2AF3703F004D1227 /* Date_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C3DDD2AF3703F004D1227 /* Date_Extension.swift */; };
 		0429FEB32ADE2B94009FC1D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0429FEB22ADE2B94009FC1D7 /* GoogleService-Info.plist */; };
 		045BB2B22ADA64D900B807D2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045BB2B12ADA64D900B807D2 /* ProfileViewController.swift */; };
@@ -14,7 +15,6 @@
 		045BB2B72ADBB73500B807D2 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045BB2B52ADBB73500B807D2 /* ProfileTableViewCell.xib */; };
 		045BB2B92ADBC66F00B807D2 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045BB2B82ADBC66F00B807D2 /* Profile.swift */; };
 		045BB2BF2ADC285300B807D2 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045BB2BE2ADC285300B807D2 /* SettingViewController.swift */; };
-		0466AAB42AF62DF3005E74BD /* TPKeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466AAB32AF62DF3005E74BD /* TPKeyboardAvoiding.swift */; };
 		0466AAB82AF6387B005E74BD /* ReceiverProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466AAB62AF6387B005E74BD /* ReceiverProfileViewController.swift */; };
 		0466AAB92AF6387B005E74BD /* ReceiverProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0466AAB72AF6387B005E74BD /* ReceiverProfileViewController.xib */; };
 		047DDBD12ADA37DA00AE0003 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047DDBD02ADA37D900AE0003 /* Home.storyboard */; };
@@ -80,7 +80,6 @@
 		045BB2B52ADBB73500B807D2 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		045BB2B82ADBC66F00B807D2 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		045BB2BE2ADC285300B807D2 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		0466AAB32AF62DF3005E74BD /* TPKeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPKeyboardAvoiding.swift; sourceTree = "<group>"; };
 		0466AAB62AF6387B005E74BD /* ReceiverProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverProfileViewController.swift; sourceTree = "<group>"; };
 		0466AAB72AF6387B005E74BD /* ReceiverProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiverProfileViewController.xib; sourceTree = "<group>"; };
 		047DDBD02ADA37D900AE0003 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -148,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E42FE517F8F6C0A43E824B6 /* Pods_Takenoko.framework in Frameworks */,
+				0409E0192B06683100B46993 /* MessageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,7 +412,6 @@
 			isa = PBXGroup;
 			children = (
 				04B88CE72ADFB32F000D4A21 /* Extension.swift */,
-				0466AAB32AF62DF3005E74BD /* TPKeyboardAvoiding.swift */,
 				041C3DDD2AF3703F004D1227 /* Date_Extension.swift */,
 			);
 			path = Extension;
@@ -461,6 +460,9 @@
 			dependencies = (
 			);
 			name = Takenoko;
+			packageProductDependencies = (
+				0409E0182B06683100B46993 /* MessageKit */,
+			);
 			productName = Takenoko;
 			productReference = 049A87C72AD806A200BF5A97 /* Takenoko.app */;
 			productType = "com.apple.product-type.application";
@@ -489,6 +491,9 @@
 				Base,
 			);
 			mainGroup = 049A87BE2AD806A200BF5A97;
+			packageReferences = (
+				0409E0172B06683100B46993 /* XCRemoteSwiftPackageReference "MessageKit" */,
+			);
 			productRefGroup = 049A87C82AD806A200BF5A97 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -598,7 +603,6 @@
 				04AD69C72AE8D52100DA5C09 /* UserDefaultsManager.swift in Sources */,
 				049E4E4E2AFF1C47006FBF0B /* Network.swift in Sources */,
 				04B88CEF2AE367D3000D4A21 /* NewMessageViewController.swift in Sources */,
-				0466AAB42AF62DF3005E74BD /* TPKeyboardAvoiding.swift in Sources */,
 				0492B2F82ADD03B8001D0CE0 /* SettingTableViewCell.swift in Sources */,
 				0466AAB82AF6387B005E74BD /* ReceiverProfileViewController.swift in Sources */,
 				04B88CEA2ADFBA6D000D4A21 /* Setting.swift in Sources */,
@@ -836,6 +840,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0409E0172B06683100B46993 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0409E0182B06683100B46993 /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0409E0172B06683100B46993 /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 049A87BF2AD806A200BF5A97 /* Project object */;
 }

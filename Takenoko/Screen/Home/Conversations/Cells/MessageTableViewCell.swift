@@ -13,7 +13,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var timeAgoLabel: UILabel!
-    @IBOutlet weak var lockView: UIView!
+    @IBOutlet weak var lockImage: UIImageView!
     @IBOutlet weak var avatarView: UIView!
     
     override func awakeFromNib() {
@@ -27,8 +27,6 @@ class MessageTableViewCell: UITableViewCell {
         avatarView.layer.borderWidth = 1
         avatarView.layer.borderColor = UIColor.lightGray.cgColor
         avatarView.clipsToBounds = true
-        
-        lockView.layer.cornerRadius = lockView.frame.height / 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
