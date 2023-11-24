@@ -90,7 +90,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="weh-IT-koD">
-                                <rect key="frame" x="329" y="99" width="12" height="12"/>
+                                <rect key="frame" x="357" y="99" width="12" height="12"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1Vk-I2-NRP">
                                         <rect key="frame" x="0.0" y="2.3333333333333321" width="12" height="7.6666666666666679"/>
@@ -121,9 +121,9 @@
                             <constraint firstItem="7nu-Ge-zeA" firstAttribute="top" secondItem="0lQ-wY-rFW" secondAttribute="bottom" id="Iqo-Tb-CBo"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0lQ-wY-rFW" secondAttribute="trailing" id="Qnd-oo-u61"/>
                             <constraint firstItem="0lQ-wY-rFW" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="TDS-zv-Xgz"/>
-                            <constraint firstItem="weh-IT-koD" firstAttribute="leading" secondItem="eqd-ep-sUC" secondAttribute="leading" id="ajV-zR-EwM"/>
                             <constraint firstItem="7nu-Ge-zeA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="jgv-kF-B3y"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7nu-Ge-zeA" secondAttribute="trailing" id="o5p-VA-zmf"/>
+                            <constraint firstItem="weh-IT-koD" firstAttribute="trailing" secondItem="eqd-ep-sUC" secondAttribute="trailing" id="p70-dj-XaO"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Tin nhắn" image="message" catalog="system" id="UxC-LL-il9"/>
@@ -222,11 +222,11 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QFk-Cw-TFB">
-                                <rect key="frame" x="0.0" y="250" width="393" height="466"/>
+                                <rect key="frame" x="0.0" y="250" width="393" height="471"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pvi-Ma-11d">
-                                <rect key="frame" x="24" y="716" width="345" height="48"/>
+                                <rect key="frame" x="24" y="721" width="345" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="f7r-9P-Oh7"/>
                                 </constraints>
@@ -252,7 +252,7 @@
                             <constraint firstItem="aF3-Rl-nXB" firstAttribute="trailing" secondItem="QFk-Cw-TFB" secondAttribute="trailing" id="Xgf-is-hm4"/>
                             <constraint firstItem="aF3-Rl-nXB" firstAttribute="trailing" secondItem="5Xb-0r-zGU" secondAttribute="trailing" id="bcn-bl-ZVy"/>
                             <constraint firstItem="pvi-Ma-11d" firstAttribute="leading" secondItem="aF3-Rl-nXB" secondAttribute="leading" constant="24" id="blg-1q-741"/>
-                            <constraint firstItem="aF3-Rl-nXB" firstAttribute="bottom" secondItem="pvi-Ma-11d" secondAttribute="bottom" constant="5" id="j7P-Jn-UYD"/>
+                            <constraint firstItem="aF3-Rl-nXB" firstAttribute="bottom" secondItem="pvi-Ma-11d" secondAttribute="bottom" id="j7P-Jn-UYD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Hồ sơ" image="person.circle" catalog="system" id="xSz-9Y-8Hx"/>

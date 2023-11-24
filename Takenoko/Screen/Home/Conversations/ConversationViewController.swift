@@ -397,7 +397,7 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
         
         lockAction.image = image
         lockAction.backgroundColor = UIColor(red: 28.0/255.0, green: 165.0/255.0, blue: 253.0/255.0, alpha: 1.0)
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, lockAction, notificationAction])
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, notificationAction, lockAction])
         swipeConfiguration.performsFirstActionWithFullSwipe = false
         
         return swipeConfiguration

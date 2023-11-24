@@ -17,9 +17,7 @@ import SwiftHEXColors
 import IQKeyboardManagerSwift
 
 class ChatViewController: MessagesViewController {
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-          return .lightContent
-    }
+    
     private var isSendingPhoto = false {
         didSet {
             messageInputBar.leftStackViewItems.forEach { item in

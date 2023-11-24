@@ -80,6 +80,9 @@
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đăng ký" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6P-Uz-w5U">
                                     <rect key="frame" x="92.333333333333329" y="100" width="208.66666666666669" height="70"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="70" id="Cg9-6W-Ic5"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="50"/>
                                     <color key="textColor" red="0.14117647059999999" green="0.47058823529999999" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
