@@ -1,15 +1,15 @@
 # Takenoko (Ứng dụng gửi tin nhắn)
 
-<img width="250" alt="Splash" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/76e82503-2fc1-4ed1-b6e2-cb586e9bb44f">
+<img width="250" alt="logo1" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/f05d77f0-2883-4523-b54c-1109dc062151">
 
 ### Takenoko là ứng dụng nhắn tin tập trung vào bảo mật, đơn giản và miễn phí. Bạn có thể sử dụng Takenoko trên tất cả các thiết bị của mình cùng một lúc - tin nhắn của bạn được đồng bộ hóa liền mạch trên mọi số lượng điện thoại hoặc máy tính bảng của bạn. 
 
-# Màn hình Onboarding
+## Màn hình Onboarding
 Bạn đã có tài khoản chưa? Bắt đầu trải nghiệm cùng Takenoko bằng cách chọn nút "Đăng ký", nếu đã có tài khoản thì hãy nhấn "Đăng nhập".
 
 <img width="250" alt="Onboarding" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/641dff5b-81a3-4957-b6ab-b9f369beb574">
 
-# Màn hình Đăng nhập, Đăng ký
+## Màn hình Đăng nhập, Đăng ký
 Kiểm tra định dạng email và mật khẩu khi người dùng nhập thông tin, khóa nút "Đăng nhập" và "Đăng ký". Khi thông tin hợp lệ thì có thể nhấn nút "Đăng nhập", "Đăng ký".
 
 Các tính năng đăng nhập bằng Google, Facebook, Apple sẽ được phát triển sau.
@@ -22,7 +22,7 @@ Nhấn nút quên mật khẩu để chuyển sang màn hình *Quên mật khẩ
 
 <img width="250" alt="Đăng ký" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/254b2a29-e53a-40a4-92e1-ec4574f8da1e">
 
-# Màn hình Quên Mật Khẩu
+## Màn hình Quên Mật Khẩu
 Địa chỉ email bạn đã nhập ở màn hình *Đăng nhập* được lưu và chuyển sang màn *Quên mật khẩu*.
 
 Kiểm tra định dạng email khi người dùng nhập thông tin, khóa nút "Gửi yêu cầu". Khi thông tin hợp lệ thì có thể nhấn nút "Gửi yêu cầu" để được đặt lại mật khẩu mới.
@@ -31,7 +31,7 @@ Kiểm tra email và đặt lại mật khẩu mới rồi đăng nhập.
 
 <img width="250" alt="Quên mật khẩu" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/33bb844a-c888-4783-b210-afb762814ed2">
 
-# Màn hình Hội thoại
+## Màn hình Hội thoại
 Màn hình này sẽ hiển thị tất cả các cuộc hội thoại của người dùng.
 
 <img width="250" alt="Hội thoại" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/1a73a343-dda2-4837-b12a-752bc179f3f7">
@@ -58,19 +58,19 @@ Bên cạnh việc khoá, mở cho cuộc hội thoại thì người dùng có 
 
 <img width="250" alt="delete" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/50a5ffed-f76a-4f6c-ba83-e21d160163ed">
 
-# Màn hình Hồ sơ
+## Màn hình Hồ sơ
 Hiển thị tất cả thông tin cá nhân của người dùng.
 
 Tại đây, người dùng có thể sửa thông tin và lưu lại.
 
 <img width="250" alt="Hồ sơ" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/83652a14-a1aa-445d-8361-37989c0523f9">
 
-# Màn hình Cài đặt
+## Màn hình Cài đặt
 Hiện tại một số tính năng đang được phát triển, xin vui lòng thử lại sau.
 
 <img width="250" alt="Cài đặt" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/33462c35-8346-406d-b582-4917333a478c">
 
-# Địa chỉ liên hệ
+## Địa chỉ liên hệ
 Mọi thắc mắc và góp ý xin vui lòng gửi về địa chỉ email : phanthingan0695@gmail.com
 
 
