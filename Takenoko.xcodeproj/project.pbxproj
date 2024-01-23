@@ -136,6 +136,7 @@
 		04B88CE92ADFBA6D000D4A21 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		04B88CEB2ADFC04F000D4A21 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		04B88CEE2AE367D3000D4A21 /* NewMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageViewController.swift; sourceTree = "<group>"; };
+		04D023542B5F991A00938378 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0D2C71846AA88611396D82CD /* Pods-Takenoko.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Takenoko.debug.xcconfig"; path = "Target Support Files/Pods-Takenoko/Pods-Takenoko.debug.xcconfig"; sourceTree = "<group>"; };
 		32FB91B97B493BC27C18293A /* Pods_Takenoko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Takenoko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3E0D866D64C473E64AC0E5 /* Pods-Takenoko.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Takenoko.release.xcconfig"; path = "Target Support Files/Pods-Takenoko/Pods-Takenoko.release.xcconfig"; sourceTree = "<group>"; };
@@ -282,6 +283,7 @@
 		049A87BE2AD806A200BF5A97 = {
 			isa = PBXGroup;
 			children = (
+				04D023542B5F991A00938378 /* README.md */,
 				049A87C92AD806A200BF5A97 /* Takenoko */,
 				049A87C82AD806A200BF5A97 /* Products */,
 				BF056CC8002DB2B829E64540 /* Pods */,
