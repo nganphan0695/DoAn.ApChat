@@ -29,7 +29,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Takenoko" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pv-hy-vb7">
-                                        <rect key="frame" x="24" y="70" width="152.33333333333334" height="42"/>
+                                        <rect key="frame" x="24" y="60" width="152.33333333333334" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="BoT-on-LKZ"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -46,7 +49,7 @@
                                         </connections>
                                     </searchBar>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqd-ep-sUC">
-                                        <rect key="frame" x="329" y="71" width="40" height="40"/>
+                                        <rect key="frame" x="329" y="65" width="40" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wBm-yG-Z51">
                                                 <rect key="frame" x="0.0" y="2" width="40" height="36.666666666666671"/>
@@ -79,18 +82,19 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.14117647059999999" green="0.47058823529999999" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="4Pv-hy-vb7" firstAttribute="top" secondItem="0lQ-wY-rFW" secondAttribute="top" constant="70" id="Dco-0c-AJM"/>
+                                    <constraint firstItem="4Pv-hy-vb7" firstAttribute="top" secondItem="0lQ-wY-rFW" secondAttribute="top" constant="60" id="Dco-0c-AJM"/>
                                     <constraint firstItem="eqd-ep-sUC" firstAttribute="centerY" secondItem="4Pv-hy-vb7" secondAttribute="centerY" id="Sge-6m-vKi"/>
                                     <constraint firstItem="ZJx-ZV-7dk" firstAttribute="leading" secondItem="0lQ-wY-rFW" secondAttribute="leading" constant="24" id="X1Q-kN-SZy"/>
                                     <constraint firstAttribute="bottom" secondItem="ZJx-ZV-7dk" secondAttribute="bottom" constant="15" id="cRf-T1-vPL"/>
                                     <constraint firstAttribute="trailing" secondItem="eqd-ep-sUC" secondAttribute="trailing" constant="24" id="ggH-3H-4kp"/>
                                     <constraint firstAttribute="trailing" secondItem="ZJx-ZV-7dk" secondAttribute="trailing" constant="24" id="hPL-ps-YfT"/>
                                     <constraint firstItem="4Pv-hy-vb7" firstAttribute="leading" secondItem="0lQ-wY-rFW" secondAttribute="leading" constant="24" id="hcN-qg-eTa"/>
+                                    <constraint firstItem="ZJx-ZV-7dk" firstAttribute="top" secondItem="4Pv-hy-vb7" secondAttribute="bottom" constant="25" id="mUi-Sh-G0t"/>
                                     <constraint firstAttribute="height" constant="200" id="p43-Mf-QV0"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="weh-IT-koD">
-                                <rect key="frame" x="357" y="99" width="12" height="12"/>
+                                <rect key="frame" x="357" y="93" width="12" height="12"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1Vk-I2-NRP">
                                         <rect key="frame" x="0.0" y="2.3333333333333321" width="12" height="7.6666666666666679"/>
@@ -381,7 +385,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tin nhắn mới" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CyN-x6-YJY">
-                                        <rect key="frame" x="115.66666666666669" y="77.666666666666671" width="162" height="35"/>
+                                        <rect key="frame" x="115.66666666666669" y="75" width="162" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="GO2-CA-1if"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -432,7 +439,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Xsz-Lx-fBK" secondAttribute="trailing" constant="24" id="5rw-Pl-QhL"/>
                                     <constraint firstItem="Xsz-Lx-fBK" firstAttribute="leading" secondItem="wAt-HD-za8" secondAttribute="leading" constant="24" id="IOh-2x-5hD"/>
-                                    <constraint firstItem="CyN-x6-YJY" firstAttribute="centerX" secondItem="wAt-HD-za8" secondAttribute="centerX" id="ejn-aj-U56"/>
+                                    <constraint firstItem="CyN-x6-YJY" firstAttribute="centerX" secondItem="wAt-HD-za8" secondAttribute="centerX" id="WP6-md-ozB"/>
                                     <constraint firstAttribute="bottom" secondItem="Xsz-Lx-fBK" secondAttribute="bottom" constant="15" id="gQk-G5-ttX"/>
                                     <constraint firstItem="CyN-x6-YJY" firstAttribute="centerY" secondItem="bGz-ey-RBa" secondAttribute="centerY" id="kXQ-8N-Sjn"/>
                                     <constraint firstAttribute="height" constant="200" id="nXC-bT-nan"/>

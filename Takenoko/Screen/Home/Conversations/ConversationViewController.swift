@@ -148,7 +148,7 @@ class ConversationViewController: UIViewController {
         }) {
             self.conversations.remove(at: index)
             if let conversation = createConversation(change){
-                self.conversations.insert(conversation, at: index)
+                self.conversations.insert(conversation, at: 0)
                 self.tableView.reloadData()
             }
         }
