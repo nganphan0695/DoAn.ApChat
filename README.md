@@ -40,7 +40,7 @@ Nhấn vào cuộc hội thoại để xem nội dung tin nhắn trong màn *Cha
 
 <img width="250" alt="chat" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/77525830-1519-49e7-963b-7647c2e5be15">
 
-Nhấn vào ảnh đại diện góc trên bên trái để thêm cuộc hội thoại mới. Màn hình sẽ được chuyển đến *NewMessage*, ở màn này người dùng có thểm tìm bạn bè qua email, tên hoặc số điện thoại.
+Nhấn vào ảnh đại diện góc trên bên phải để thêm cuộc hội thoại mới. Màn hình sẽ được chuyển đến *NewMessage*, ở màn này người dùng có thểm tìm bạn bè qua email, tên hoặc số điện thoại.
 
 <img width="250" alt="tin nhắn mới" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/0108d0c6-c69c-4587-a463-d6db2bdb8aa4">
 
