@@ -36,11 +36,11 @@ Màn hình này sẽ hiển thị tất cả các cuộc hội thoại của ng�
 
 <img width="250" alt="Hội thoại" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/1a73a343-dda2-4837-b12a-752bc179f3f7">
 
-Nhấn vào cuộc hội thoại để xem nội dung tin nhắn trong màn *Chat*. Tại đây, người dùng có thể trò chuyện cùng bạn bè, hay xem thông tin của bạn bè bằng cách nhấn vào avarta của đối tượng cần xem.
+Nhấn vào cuộc hội thoại để xem nội dung tin nhắn trong màn *Chat*. Tại đây, người dùng có thể trò chuyện cùng bạn bè, hay xem thông tin của bạn bè bằng cách nhấn vào ảnh đại diện của đối tượng cần xem.
 
 <img width="250" alt="chat" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/77525830-1519-49e7-963b-7647c2e5be15">
 
-Nhấn vào avatar góc trên bên trái để thêm cuộc hội thoại mới. Màn hình sẽ được chuyển đến *NewMessage*, ở màn này người dùng có thểm tìm bạn bè qua email, tên hoặc số điện thoại.
+Nhấn vào ảnh đại diện góc trên bên trái để thêm cuộc hội thoại mới. Màn hình sẽ được chuyển đến *NewMessage*, ở màn này người dùng có thểm tìm bạn bè qua email, tên hoặc số điện thoại.
 
 <img width="250" alt="tin nhắn mới" src="https://github.com/nganphan0695/DoAn.ApChat/assets/138754523/0108d0c6-c69c-4587-a463-d6db2bdb8aa4">
 
